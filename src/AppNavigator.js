@@ -23,6 +23,23 @@ import Dasboard from './Component/Dashboard/Dashboard';
       }
   );
 
+  // const NavigatorLogin = createStackNavigator(
+  //   {
+  //     Login:{screen:Login},
+  //     Register:{screen:Register},
+  //     },
+  //     {
+  //       defaultNavigationOptions: {
+  //         headerStyle: {
+  //           backgroundColor: 'black',
+  //         },
+  //         headerTintColor: '#fff',
+  //       },
+  //   }
+  // );
+
+
+
   const NavigatorDashboard = createStackNavigator(
     {
       Dasboard: { screen: Dasboard},

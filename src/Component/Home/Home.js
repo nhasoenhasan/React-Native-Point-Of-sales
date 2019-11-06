@@ -9,7 +9,7 @@ import { Button,Text,Thumbnail} from 'native-base';
 
 export default function Home(props) {
 	
-	//AsyncStorage.getItem('xaccess-token', () => {}).then((token) => {if (token !== null) props.navigation.navigate('NavigatorDashboard');});
+	AsyncStorage.getItem('xaccess-token', () => {}).then((token) => {if (token !== null) props.navigation.navigate('NavigatorDashboard');});
 
 	return (
 		

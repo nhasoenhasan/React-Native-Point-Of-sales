@@ -4,12 +4,10 @@ import {postLogin} from '../Public/Redux/Actions/auth';
 import {
   Text,
   View,
-  TouchableOpacity
-   
 } from 'react-native';
 
 import { Button,Container, Header, Content, Form, Item, Input } from 'native-base';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Login = (props) => {
     const [input, setInput] = useState({ username: "", password: "" ,token:""});
@@ -17,14 +15,19 @@ const Login = (props) => {
 
 	//On Submit Login Data
 	const handleSubmit = async (event) => {
-		event.preventDefault();
-        try {
-			const result=dispatch(postLogin (input))
+		dispatch(postLogin (input))
+		.then(response => {
+			console.log(response.value)
+		if (response.value.data.status === 200) {
 			props.navigation.navigate('NavigatorDashboard')
-        } catch (error) {
-          console.log(error);
-        }
+		} else {
+			alert(response.value.data.message);
+		}
+		})
+		.catch(error => alert(error));
 	};
+
+	
 	
 	console.log(input)
 	return (

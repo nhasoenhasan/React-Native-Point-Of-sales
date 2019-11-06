@@ -1,50 +1,79 @@
-import React from 'react';
-
+import React,{useState,useEffect}  from 'react';
+import {postRegister} from '../Public/Redux/Actions/auth';
 import {
   Text,
   View,
 } from 'react-native';
-
 import { Button,Container, Header, Content, Form, Item, Input } from 'native-base';
+import { useDispatch } from "react-redux";
 
+export default function Register(props) {
+	const [input, setInput] = useState({ username: "", password: "" ,email:""});
+	const dispatch = useDispatch();
 
-export default function Register() {
+	props.navigation.navigate({ routeName: 'NavigatorLogin', key:'Home'});
+	//On Submit Login Data
+	const handleSubmit = async (event) => {
+		dispatch(postRegister (input))
+		.then(response => {
+		if (response.value.data.status === 200) {
+			alert(response.value.data.message);
+			props.navigation.navigate('Login')
+		} else {
+			alert(response.value.data.message);
+		}
+		})
+		.catch(error => alert(error));
+	};
+
+	console.log(input)
 
 	return (
-					<View style={{
-						flex: 1,
-						flexDirection: 'column',
-						justifyContent: 'space-between',
-						alignItems:'center',
-						backgroundColor:'black'
-					}}>
-						<View style={{width: 300, height: 50,justifyContent: 'center',marginStart:27,marginTop:10}} >
-							<Text style={{fontWeight:"bold",color:'white',fontSize: 25}}>Make Account</Text>
-						</View>
-						<View style={{width: 300, height: 200}}>
-							<Form>
-								<Item style={{marginBottom:10,color:'white'}}>
-									<Input placeholder="Email" />
-								</Item>
-								<Item style={{marginBottom:10}}>
-									<Input placeholder="Username" />
-								</Item>
-								<Item style={{marginBottom:10}}>
-									<Input placeholder="Password" />
-								</Item>
-								
-								<Button style={{marginTop:20,width:150,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}} rounded>
-									<Text style={{fontWeight:"bold",fontSize: 17}}>Register</Text>
-								</Button>
-								
-							</Form>
-						</View>
-						<View style={{width: 300, height: 50, }}></View>
-						<View style={{width: 300, height: 50, }}>
-							
-						</View>
-						
-					</View>
+
+		<View style={{
+			flex: 1,
+			flexDirection: 'column',
+			justifyContent: 'space-between',
+			alignItems:'center',
+			backgroundColor:'black'
+		}}>
+			<View style={{width: 300, height: 50,justifyContent: 'center',marginStart:27,marginTop:10}} >
+				<Text style={{fontWeight:"bold",color:'white',fontSize: 25}}>Make Account</Text>
+			</View>
+			<View style={{width: 300, height: 200}}>
+				<Form>
+					<Item style={{marginBottom:10,color:'white'}}>
+						<Input placeholder="Email"
+						 style={{color:'white'}}
+						 onChangeText={(email) => setInput({...input, email: email })}/>
+					</Item>
+					<Item style={{marginBottom:10}}>
+						<Input placeholder="Username"
+						style={{color:'white'}}
+						onChangeText={(username) => setInput({...input, username: username })} />
+					</Item>
+					<Item style={{marginBottom:10}}>
+						<Input placeholder="Password"
+						style={{color:'white'}}
+						secureTextEntry={true}
+						onChangeText={(password) => setInput({...input, password: password })} />
+					</Item>
+					
+					<Button 
+					style={{marginTop:20,width:150,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}} 
+					onPress={handleSubmit}
+					rounded>
+						<Text style={{fontWeight:"bold",fontSize: 17}}>Register</Text>
+					</Button>
+					
+				</Form>
+			</View>
+			<View style={{width: 300, height: 50, }}></View>
+			<View style={{width: 300, height: 50, }}>
+				
+			</View>
+			
+		</View>
 				
 			
 	);
