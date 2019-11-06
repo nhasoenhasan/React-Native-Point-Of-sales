@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-community/async-storage';
+
 const initialState = {
     registerResponse: [],
     registerMessage:'',
@@ -9,6 +11,7 @@ const initialState = {
     isLoading: false,
     isRejected: false,
     isFulfilled: false,
+    asynctoken:''
   };
   
   const auth = (state = initialState, action) => {
@@ -49,14 +52,14 @@ const initialState = {
           isRejected: true,
         };
       case 'POST_LOGIN_FULFILLED':
-          const token =action.payload.data.token;
-          localStorage.setItem("x-access-token", token);
+        const token =action.payload.data.token;
+        AsyncStorage.setItem('xaccess-token',token)
         return {
           ...state,
           isLoading: false,
           isFulfilled: true,
           loginMessage: action.payload.data.message,
-          loginStatus:action.payload.data.status
+          loginStatus:action.payload.data.status,
         };  
      
       default:

@@ -1,32 +1,67 @@
 import React from "react";
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
 import Home from './Component/Home/Home';
 import Login from './Component/Auth/Login';
 import Register from './Component/Auth/Register';
 import Dasboard from './Component/Dashboard/Dashboard';
 
+    
+  const NavigatorHome = createStackNavigator(
+    {
+      Home: { screen: Home},
+      Login:{screen:Login},
+      Register:{screen:Register},
+      },
+      {
+        defaultNavigationOptions: {
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: '#fff',
+        },
+      }
+  );
 
-  const AppNavigator = createStackNavigator({
-    Home: { screen: Home},
-    Login:{screen:Login},
-    Register:{screen:Register},
+  const NavigatorDashboard = createStackNavigator(
+    {
+      Dasboard: { screen: Dasboard},
+      },
+      {
+        defaultNavigationOptions: {
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: '#fff',
+        },
+      }
+  );
+
+  const Router = createSwitchNavigator(
+    {
+      NavigatorHome,
+      NavigatorDashboard,
     },
     {
-      defaultNavigationOptions: {
-        headerStyle: {
-          backgroundColor: 'black',
-        },
-        headerTintColor: '#fff',
-      },
-    });
-
- 
+      initialRouteName: 'NavigatorHome',
+      headerMode: 'none',
+    }
+  );
 
 
+  // const AppNavigator = createStackNavigator({
+  //   Home: { screen: Home},
+  //   Login:{screen:Login},
+  //   Register:{screen:Register},
+  //   },
+  //   {
+  //     defaultNavigationOptions: {
+  //       headerStyle: {
+  //         backgroundColor: 'black',
+  //       },
+  //       headerTintColor: '#fff',
+  //     },
+  //   });
 
-// Login:{screen:Login},
-// Register:{screen:Register},
-// // Dasboard: { screen: Dasboard},
-export default createAppContainer(AppNavigator);
+
+export default createAppContainer(Router);;

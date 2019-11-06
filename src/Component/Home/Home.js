@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Homestyle';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   View,
 } from 'react-native';
@@ -9,6 +9,8 @@ import { Button,Text,Thumbnail} from 'native-base';
 
 export default function Home(props) {
 	
+	//AsyncStorage.getItem('xaccess-token', () => {}).then((token) => {if (token !== null) props.navigation.navigate('NavigatorDashboard');});
+
 	return (
 		
 		<View style={styles.Layout}>

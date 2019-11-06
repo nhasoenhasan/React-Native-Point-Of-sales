@@ -1,10 +1,10 @@
-import React,{useState} from 'react';
-import {AsyncStorage} from 'react-native';
+import React,{useState,useEffect} from 'react';
 import {postLogin} from '../Public/Redux/Actions/auth';
 
 import {
   Text,
   View,
+  TouchableOpacity
    
 } from 'react-native';
 
@@ -12,21 +12,21 @@ import { Button,Container, Header, Content, Form, Item, Input } from 'native-bas
 import { useSelector, useDispatch } from "react-redux";
 
 const Login = (props) => {
-    const [input, setInput] = useState({ username: "", password: "" });
+    const [input, setInput] = useState({ username: "", password: "" ,token:""});
 	const dispatch = useDispatch();
 
+	//On Submit Login Data
 	const handleSubmit = async (event) => {
-        event.preventDefault();
+		event.preventDefault();
         try {
-		const result=dispatch(postLogin (input))
-          console.log("Berhasil",result)
+			const result=dispatch(postLogin (input))
+			props.navigation.navigate('NavigatorDashboard')
         } catch (error) {
           console.log(error);
         }
-    };
-
-	console.log("DATA",input)
+	};
 	
+	console.log(input)
 	return (
 		<View style={{
 			flex: 1,
@@ -47,6 +47,7 @@ const Login = (props) => {
 					</Item>
 					<Item style={{marginBottom:10}}>
 						<Input placeholder="Password" 
+						secureTextEntry={true}
 						onChangeText={(password) => setInput({...input, password: password })}
 						value={input.password}
 						style={{color:"white"}}/>
