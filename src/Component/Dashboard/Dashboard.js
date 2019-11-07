@@ -6,7 +6,7 @@ import {
    
 } from 'react-native';
 import {getProduct} from '../Public/Redux/Actions/product';
-
+import Drawer from 'react-native-drawer'
 import { Button,Container, Header, Content, Form, Item, Input } from 'native-base';
 
 
@@ -32,9 +32,9 @@ export default function Dashboard() {
 		});
 	  }
 	
-	  useEffect(()=>{
-		fetchddata()
-	  },[input])
+	//   useEffect(()=>{
+	// 	fetchddata()
+	//   },[input])
 
 	return (
 					<View style={{
@@ -42,34 +42,12 @@ export default function Dashboard() {
 						flexDirection: 'column',
 						justifyContent: 'space-between',
 						alignItems:'center',
-						backgroundColor:'black'
 					}}>
 						<View style={{width: 300, height: 50,justifyContent: 'center',marginStart:27,marginTop:10}} >
-							<Text style={{fontWeight:"bold",color:'white',fontSize: 25}}>Dashboard Page</Text>
-						</View>
-						<View style={{width: 300, height: 200}}>
-							<Form>
-								<Item style={{marginBottom:10,color:'white'}}>
-									<Input placeholder="Email" />
-								</Item>
-								<Item style={{marginBottom:10}}>
-									<Input placeholder="Username" />
-								</Item>
-								<Item style={{marginBottom:10}}>
-									<Input placeholder="Password" />
-								</Item>
-								
-								<Button style={{marginTop:20,width:150,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}} rounded>
-									<Text style={{fontWeight:"bold",fontSize: 17}}>Register</Text>
-								</Button>
-								
-							</Form>
-						</View>
-						<View style={{width: 300, height: 50, }}></View>
-						<View style={{width: 300, height: 50, }}>
-							
+							<Text style={{fontWeight:"bold",fontSize: 25}}>Dashboard Page</Text>
 						</View>
 						
+							
 					</View>
 				
 			
