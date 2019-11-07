@@ -27,8 +27,6 @@ const Login = (props) => {
 		.catch(error => alert(error));
 	};
 
-	
-	
 	console.log(input)
 	return (
 		<View style={{

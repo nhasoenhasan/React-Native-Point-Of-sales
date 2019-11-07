@@ -8,7 +8,8 @@ import Login from './Component/Auth/Login';
 import Register from './Component/Auth/Register';
 import Dashboard from './Component/Dashboard/Dashboard';
 import Product from './Component/Dashboard/Product';
-import Page2 from './Component/Dashboard/Page2';
+import Category from './Component/Dashboard/Category';
+import Addcategories from './Component/Dashboard/Addcategories';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { Thumbnail} from 'native-base';
 import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
@@ -45,7 +46,15 @@ import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
           tabBarLabel:'HOME'
         }
       },
-      Page2,
+      Category:{
+        screen:Category,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor, focused }) => (
+            <Icon size={23} name="content-copy" style={{ color: tintColor }} />
+          ),
+          tabBarLabel:'Category'
+        }
+      },
       Product:{
         screen:Product,
         navigationOptions: {
@@ -66,27 +75,15 @@ import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
   //Stack Dashboard Navigator
   const DashboardStackNavigator = createStackNavigator(
     {
-      DashboardTabNavigator: DashboardTabNavigator
-    },
-    {
-      headerMode: 'none'
-      // defaultNavigationOptions: ({ navigation }) => {
-      //   return {
-      //     headerLeft: (
-      //       <TouchableOpacity onPress={() => navigation.openDrawer()}>
-      //         <Thumbnail small style={{marginStart:10}}  source={{uri: 'http://lawlessjakarta.com/wp-content/uploads/2017/09/Lawless_burgerbar_header.gif'}}/>
-      //       </TouchableOpacity>
-      //     ),
-      //     headerRight: (
-      //       <Icon
-      //       style={{ paddingRight: 10,color:'#f6b233' }}
-      //       onPress={() =>navigation.navigate('Page2')}
-      //       name="cart"
-      //       size={25}
-      //     />
-      //     ),
-      //   };
-      //}
+      DashboardTabNavigator: {
+          screen:DashboardTabNavigator,
+          navigationOptions : {
+            header: null
+        }
+          
+      },
+      Addcategories:Addcategories,
+
     },
   );
 

@@ -4,7 +4,7 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text, Left } from 'native-base';
+import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text, Left,Icon,Fab,Button } from 'native-base';
 import { useSelector,useDispatch  } from 'react-redux';
 
 export default function Page1() {
@@ -39,6 +39,13 @@ export default function Page1() {
                 })}
             </ScrollView>
             </Content>
+            <Fab
+              containerStyle={{ }}
+              style={{ backgroundColor: '#f6b233', }}
+              position="bottomRight"
+             >
+              <Icon name="add" />
+            </Fab>
         </Container>	
 	);
 }
