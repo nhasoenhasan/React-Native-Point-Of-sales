@@ -1,55 +1,89 @@
 import React, { useState,useEffect} from 'react';
-import { useSelector, useDispatch } from "react-redux";
 import {
-  Text,
   View,
-   
+  TouchableOpacity,
+  Image,
+  ScrollView
 } from 'react-native';
+import {Content, Container,Card, CardItem, Header, Item, Input, Button, Text, Thumbnail, Left, Body, Right } from 'native-base';
+import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import { useSelector,useDispatch  } from 'react-redux';
 import {getProduct} from '../Public/Redux/Actions/product';
-import Drawer from 'react-native-drawer'
-import { Button,Container, Header, Content, Form, Item, Input } from 'native-base';
 
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  const [input, setInput] = useState({ search: "",sort: "",order:"" });
+  const dispatch = useDispatch()
 
-	const initialFormState = { search: "",
-                             sort: "",
-                              order:"" };
-	const [input, setInput] = useState(initialFormState);
-	  
-	const dispatch = useDispatch();
-	const result = useSelector(state => state.productList);
-	console.log("DATA PRODUCT =",result)
+  const fetchddata=async()=>{
+    await dispatch(getProduct (input))
+    .then(result => {
+      // console.log("Input",input)
+      // console.log("Hasil",result)
+    })
+    .catch(err => {
+      alert(err);
+    });
+  }
 
-	const fetchddata=async()=>{
-		await dispatch(getProduct ())
-		.then(result => {
-		  // console.log("Input",input)
-		  // console.log("Hasil",result)
-		})
-		.catch(err => {
-		  console.log(err);
-		});
-	  }
-	
-	//   useEffect(()=>{
-	// 	fetchddata()
-	//   },[input])
+  useEffect(()=>{
+    fetchddata()
+  },[input])
 
+  const product = useSelector(state => state.product.productList)
 	return (
-					<View style={{
-						flex: 1,
-						flexDirection: 'column',
-						justifyContent: 'space-between',
-						alignItems:'center',
-					}}>
-						<View style={{width: 300, height: 50,justifyContent: 'center',marginStart:27,marginTop:10}} >
-							<Text style={{fontWeight:"bold",fontSize: 25}}>Dashboard Page</Text>
-						</View>
-						
-							
-					</View>
-				
-			
+    <Container >
+      <Header style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor:'white'}} >
+        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+          <Thumbnail small style={{marginStart:10}}  source={{uri: 'http://lawlessjakarta.com/wp-content/uploads/2017/09/Lawless_burgerbar_header.gif'}}/>
+        </TouchableOpacity>
+        <Item 
+            rounded 
+            style={{
+              width:230,height:34,
+              boxShadow: "0px 10px 100px 5px black",
+              borderWidth: 3,
+              borderRadius: 10,
+              borderColor: '#ddd',
+              borderBottomWidth: 0,
+              shadowColor: 'black',
+              shadowOffset: { width: 20, height: 2 },
+              shadowOpacity: 0.8,
+              shadowRadius: 5,
+              elevation: 1,
+              marginTop:5}}>
+            <Input style={{paddingTop:10,paddingStart:20}} placeholder='Search....'/>
+          </Item>
+          <Icon
+            style={{ paddingRight: 10,marginTop:7,paddingEnd:20,color:'#f6b233' }}
+            onPress={() =>props.navigation.navigate('Page2')}
+            name="cart"
+            size={25}
+          />
+      </Header>
+     <Content>
+      <View style={{flexDirection: 'column',alignItems:'center'}}>
+      <ScrollView>
+        {product.map(item=>{
+          return(
+            <Card style={{width:300,backgroundColor:'black'}}>
+              <CardItem cardBody>
+                <Image  source={{uri:item.image}} style={{height: 200, width: null, flex: 1}}/>
+              </CardItem>
+              <CardItem style={{width:300,backgroundColor:'black'}}>  
+                <Left>
+                  <Text style={{color:'white'}}>{item.name}</Text>
+                </Left>
+              </CardItem>
+            </Card>
+          )
+        })}
+      </ScrollView>
+      </View>
+      </Content>
+    </Container>	
 	);
 }

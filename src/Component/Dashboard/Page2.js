@@ -13,9 +13,8 @@ export default function Page1() {
             flexDirection: 'column',
             justifyContent: 'space-between',
             alignItems:'center',
-            backgroundColor:'black'
         }}>
-            <Text style={{color:"white",fontSize:20,fontWeight:"bold"}}>Page 2</Text>
+            <Text style={{fontSize:20,fontWeight:"bold"}}>Page 2</Text>
         </View>	
 	);
 }

@@ -6,9 +6,12 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Home from './Component/Home/Home';
 import Login from './Component/Auth/Login';
 import Register from './Component/Auth/Register';
-import Page1 from './Component/Dashboard/Page1';
+import Dashboard from './Component/Dashboard/Dashboard';
+import Product from './Component/Dashboard/Product';
 import Page2 from './Component/Dashboard/Page2';
-import Dasboard from './Component/Dashboard/Dashboard';
+import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import { Thumbnail} from 'native-base';
+import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
 
   //Welcome Screen
   const NavigatorHome = createStackNavigator(
@@ -28,28 +31,70 @@ import Dasboard from './Component/Dashboard/Dashboard';
   );
 
   //Bottom Navigator
-  Page1.navigationOptions={
+  Dashboard.navigationOptions={
     title: 'Page1g',
   }
   const DashboardTabNavigator = createMaterialBottomTabNavigator(
     {
-      Page1,
+      Dashboard:{
+        screen:Dashboard,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor, focused }) => (
+            <Icon size={23} name="home" style={{ color: tintColor }} />
+          ),
+          tabBarLabel:'HOME'
+        }
+      },
       Page2,
+      Product:{
+        screen:Product,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor, focused }) => (
+            <Icon size={30} name="food" style={{ color: tintColor }} />
+          ),
+          tabBarLabel:'Product'
+        }
+      }
+    },
+    {
+      activeColor: '#f6b233',
+      barStyle: { backgroundColor: '#ffffff' }
     }
+    
   );
 
   //Stack Dashboard Navigator
   const DashboardStackNavigator = createStackNavigator(
     {
       DashboardTabNavigator: DashboardTabNavigator
-    }
+    },
+    {
+      headerMode: 'none'
+      // defaultNavigationOptions: ({ navigation }) => {
+      //   return {
+      //     headerLeft: (
+      //       <TouchableOpacity onPress={() => navigation.openDrawer()}>
+      //         <Thumbnail small style={{marginStart:10}}  source={{uri: 'http://lawlessjakarta.com/wp-content/uploads/2017/09/Lawless_burgerbar_header.gif'}}/>
+      //       </TouchableOpacity>
+      //     ),
+      //     headerRight: (
+      //       <Icon
+      //       style={{ paddingRight: 10,color:'#f6b233' }}
+      //       onPress={() =>navigation.navigate('Page2')}
+      //       name="cart"
+      //       size={25}
+      //     />
+      //     ),
+      //   };
+      //}
+    },
   );
 
 
   //Drawer Dashboard
   const NavigatorDashboard =  createDrawerNavigator(
     {
-      Dasboard: { screen: DashboardStackNavigator},
+      Dashboard: { screen: DashboardStackNavigator},
       },
       {
         contentOptions: {
