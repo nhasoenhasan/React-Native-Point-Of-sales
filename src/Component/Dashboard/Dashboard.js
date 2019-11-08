@@ -55,7 +55,8 @@ export default function Dashboard(props) {
               shadowRadius: 5,
               elevation: 1,
               marginTop:5}}>
-            <Input style={{paddingTop:10,paddingStart:20}} placeholder='Search....'/>
+            <Input style={{paddingTop:10,paddingStart:20}} placeholder='Search....'
+             onChangeText={(search) => setInput({...input, search: search })}/>
           </Item>
           <Icon
             style={{ paddingRight: 10,marginTop:7,paddingEnd:20,color:'#f6b233' }}

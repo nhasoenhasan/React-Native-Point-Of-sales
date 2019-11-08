@@ -11,6 +11,8 @@ import Product from './Component/Dashboard/Product';
 import Category from './Component/Dashboard/Category';
 import Addcategories from './Component/Dashboard/Addcategories';
 import Editcategories from './Component/Dashboard/EditCategories';
+import Addproduct from './Component/Dashboard/Addproduct';
+import Editproduct from './Component/Dashboard/Editproduct';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { Thumbnail} from 'native-base';
 import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
@@ -80,11 +82,12 @@ import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
           screen:DashboardTabNavigator,
           navigationOptions : {
             header: null
-        }
-          
+        } 
       },
       Addcategories:Addcategories,
       Editcategories:Editcategories,
+      AddProduct:Addproduct,
+      Editproduct:Editproduct,
 
     },
   );

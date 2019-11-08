@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text, Left,Button, Icon, Fab,Form,Item,Input  } from 'native-base';
 import { useSelector,useDispatch  } from 'react-redux';
-import {postCategories} from '../Public/Redux/Actions/categories';
+import {patchCategories} from '../Public/Redux/Actions/categories';
 
 export default function Editcategories(props) {
     const [input, setInput] = useState({ id_categories:"",Categories:"" });
@@ -16,7 +16,7 @@ export default function Editcategories(props) {
 
     console.log(input)
     const handleSubmit = async (event) => {
-        dispatch(postCategories (input))
+        dispatch(patchCategories (input))
         .then(response => {
         if (response.value.data.status === 200) {
             props.navigation.navigate('Category')
@@ -39,7 +39,6 @@ export default function Editcategories(props) {
             <Content >
                 <View style={{width: 300,paddingTop:40,justifyContent: 'center'}}>
                     <Form>
-                        {/* <Text>{JSON.stringify(navigation.getparam('passedData','Null'))}</Text> */}
                         <Item>
                             <Input placeholder="Insert Categories" 
                             onChangeText={(Categories) => setInput({...input, Categories: Categories })}

@@ -11,30 +11,30 @@ export const getProduct = (data) => {
   };
 };
 
-// export const postProduct = (input) => {
-//   return {
-//     type: 'POST_PRODUCT',
-//     payload: axios.post ('https://pointofsaleshasan.herokuapp.com/product',input,{headers:headers}),
-//   };
-// };
+export const postProduct = (input) => {
+  return {
+    type: 'POST_PRODUCT',
+    payload: axios.post ('https://pointofsaleshasan.herokuapp.com/product',input),
+  };
+};
 
-// export const patchProduct = (input) => {
-//   const id=input.id_product;
-//   return {
-//     type: 'PATCH_PRODUCT',
-//     payload: axios.patch ('https://pointofsaleshasan.herokuapp.com/product/'+id,input,{headers:headers}
-//     )
-//   };
-// };
+export const patchProduct = (input) => {
+  const id=input.id_product;
+  return {
+    type: 'PATCH_PRODUCT',
+    payload: axios.patch ('https://pointofsaleshasan.herokuapp.com/product/'+id,input,
+    )
+  };
+};
 
-// export const deleteProduct = (input) => {
-//   const id=input.id_product;
-//   return {
-//     type: 'DELETE_PRODUCT',
-//     payload: axios.delete ('https://pointofsaleshasan.herokuapp.com/product/'+id,{headers:headers},
-//     )
-//   };
-// };
+export const deleteProduct = (input) => {
+  const id=input;
+  return {
+    type: 'DELETE_PRODUCT',
+    payload: axios.delete ('https://pointofsaleshasan.herokuapp.com/product/'+id,
+    )
+  };
+};
 
 // export const postOrder=(input,total)=>{
 //   // input.push(total)

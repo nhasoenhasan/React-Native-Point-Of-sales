@@ -42,7 +42,6 @@ export default function Addcategories(props) {
                             <Input />
                         </Item>
                         <Item>
-                            <Input ></Input>
                         </Item>
                         <Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}}
 						 onPress={handleSubmit} rounded>
