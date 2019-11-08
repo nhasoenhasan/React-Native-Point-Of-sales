@@ -8,17 +8,16 @@ import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text, Left,
 import { useSelector,useDispatch  } from 'react-redux';
 import {postCategories} from '../Public/Redux/Actions/categories';
 
-export default function Addcategories(props) {
+export default function Editcategories(props) {
     const [input, setInput] = useState({ id_categories:"",Categories:"" });
-    const dispatch = useDispatch()
-    
-    // console.log("DATA=",navigation.state.params.name)
-    // console.log("ID=",navigation.state.params.id)
+    const {navigation}=props;
 
+    const dispatch = useDispatch()
+
+    console.log(input)
     const handleSubmit = async (event) => {
         dispatch(postCategories (input))
         .then(response => {
-            console.log(response.value)
         if (response.value.data.status === 200) {
             props.navigation.navigate('Category')
         } else {
@@ -28,7 +27,12 @@ export default function Addcategories(props) {
         .catch(error => alert(error));
     };
 
-    // console.log("DATA",navigation.state.params.id)
+    
+    useEffect(()=>{
+        setInput({id_categories: navigation.state.params.id,Categories:navigation.state.params.name })
+    },[])
+   
+    
    
 	return (
         <Container>
@@ -38,7 +42,8 @@ export default function Addcategories(props) {
                         {/* <Text>{JSON.stringify(navigation.getparam('passedData','Null'))}</Text> */}
                         <Item>
                             <Input placeholder="Insert Categories" 
-                            onChangeText={(Categories) => setInput({...input, Categories: Categories })}/>
+                            onChangeText={(Categories) => setInput({...input, Categories: Categories })}
+                            value={input.Categories}/>
                             <Input />
                         </Item>
                         <Item>

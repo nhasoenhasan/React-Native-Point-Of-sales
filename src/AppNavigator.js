@@ -10,6 +10,7 @@ import Dashboard from './Component/Dashboard/Dashboard';
 import Product from './Component/Dashboard/Product';
 import Category from './Component/Dashboard/Category';
 import Addcategories from './Component/Dashboard/Addcategories';
+import Editcategories from './Component/Dashboard/EditCategories';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { Thumbnail} from 'native-base';
 import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
@@ -83,6 +84,7 @@ import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
           
       },
       Addcategories:Addcategories,
+      Editcategories:Editcategories,
 
     },
   );

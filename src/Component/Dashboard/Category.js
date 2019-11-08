@@ -3,7 +3,10 @@ import {
   View,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableHighlight,
+  Modal,
+  Alert
 } from 'react-native';
 import { 
   Thumbnail,
@@ -15,6 +18,7 @@ import {
   Body, 
   Text, 
   Left,
+  Toast,
   Button, 
   Icon, 
   Fab ,
@@ -22,12 +26,11 @@ import {
    } from 'native-base';
 import { useSelector,useDispatch  } from 'react-redux';
 import {getCategories} from '../Public/Redux/Actions/categories';
-import AwesomeAlert from 'react-native-awesome-alerts';
-import {deleteCategories } from '../Public/Redux/Actions/categories';
+import {deleteCategories} from '../Public/Redux/Actions/categories';
 
 export default function Category(props) {
   const [input, setInput] = useState({ id_categories:"",Categories:"" });
-  const [showAlert, setAlert] = useState(false);
+  const [showToast, setshowToast] = useState(false);
   const dispatch = useDispatch()
   const categories = useSelector(state => state.categories.categoriesList)
 
@@ -46,21 +49,34 @@ export default function Category(props) {
     fetchddata()
   },[])
 
-  const deleteCategories=(id)=>{
-    console.log(id)
-    dispatch(deleteCategories(id))
-		.then(response => {
-		if (response.value.data.status === 200) {
-      
-		} else {
-			alert(response.value.data.message);
-		}
-		})
-		.catch(error => alert(error));
-  }
- const hideAlert = () => {
-    setAlert(false);
+  const handleSubmitdelete = async (id) => {
+    try {
+      await dispatch(deleteCategories(id))
+    } catch (err) {
+      console.log(err)
+    }
   };
+
+  const onShow=(item)=>{
+    Alert.alert(
+      'Delete This Item?',
+      item.Categories,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', 
+          onPress: () =>  handleSubmitdelete(item.id_categories)},
+          
+      ],
+      {cancelable: false},
+    );
+    
+  }
+  
+
 	return (
         <Container>
             <Header style={{backgroundColor:'white'}}>
@@ -79,22 +95,23 @@ export default function Category(props) {
                                 </View>
                                   <Right>
                                   <TouchableOpacity
-                                    onPress={() => {
-                                      alert('Edit!');
-                                    }}>
-                                    <Icon type="Ionicons" name="md-create" style={{fontSize: 20, color: 'green',paddingEnd:10}} />
+                                    onPress={() =>
+                                      props.navigation.navigate('Editcategories',{
+                                        name:item.Categories,
+                                        id:item.id_categories
+                                      })
+                                    }>
+                                    <Icon type="Ionicons" name="md-create" style={{fontSize: 20, color: 'green',paddingEnd:30}} />
                                   </TouchableOpacity> 
                                   </Right>
                                   <TouchableOpacity
-                                    onPress={(item) => {deleteCategories(item.id_categories)}}
-                                    //onPress={()=>{alert('Edit!'),setInput({...input,id_categories:item.id_categories})}}
-                                    >
+                                    onPress={()=>{onShow(item)}}
+                                  >
                                     <Icon type="Ionicons" name="ios-trash" style={{fontSize: 20, color: 'red',paddingStart:5}} />
                                   </TouchableOpacity>
                             </Body>
                             </CardItem>
                         </Card>
-                        
                     </View>
                     )
                 })}
