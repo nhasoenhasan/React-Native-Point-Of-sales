@@ -13,9 +13,8 @@ import Addcategories from './Component/Dashboard/Addcategories';
 import Editcategories from './Component/Dashboard/EditCategories';
 import Addproduct from './Component/Dashboard/Addproduct';
 import Editproduct from './Component/Dashboard/Editproduct';
+import Chart from './Component/Dashboard/Chart';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
-import { Thumbnail} from 'native-base';
-import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
 
   //Welcome Screen
   const NavigatorHome = createStackNavigator(
@@ -63,6 +62,24 @@ import {TouchableOpacity, Header, Item,Input,Button, Text } from 'react-native';
         navigationOptions: {
           tabBarIcon: ({ tintColor, focused }) => (
             <Icon size={30} name="food" style={{ color: tintColor }} />
+          ),
+          tabBarLabel:'Product'
+        }
+      },
+      Product:{
+        screen:Product,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor, focused }) => (
+            <Icon size={30} name="food" style={{ color: tintColor }} />
+          ),
+          tabBarLabel:'Product'
+        }
+      },
+      Chart:{
+        screen:Chart,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor, focused }) => (
+            <Icon size={30} name="cart" style={{ color: tintColor }} />
           ),
           tabBarLabel:'Product'
         }

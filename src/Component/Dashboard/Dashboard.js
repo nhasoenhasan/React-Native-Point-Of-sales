@@ -36,34 +36,37 @@ export default function Dashboard(props) {
       <Header style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor:'white'}} >
-        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
-          <Thumbnail small style={{marginStart:10}}  source={{uri: 'http://lawlessjakarta.com/wp-content/uploads/2017/09/Lawless_burgerbar_header.gif'}}/>
-        </TouchableOpacity>
-        <Item 
-            rounded 
-            style={{
-              width:230,height:34,
-              boxShadow: "0px 10px 100px 5px black",
-              borderWidth: 3,
-              borderRadius: 10,
-              borderColor: '#ddd',
-              borderBottomWidth: 0,
-              shadowColor: 'black',
-              shadowOffset: { width: 20, height: 2 },
-              shadowOpacity: 0.8,
-              shadowRadius: 5,
-              elevation: 1,
-              marginTop:5}}>
-            <Input style={{paddingTop:10,paddingStart:20}} placeholder='Search....'
-             onChangeText={(search) => setInput({...input, search: search })}/>
-          </Item>
-          <Icon
-            style={{ paddingRight: 10,marginTop:7,paddingEnd:20,color:'#f6b233' }}
-            onPress={() =>props.navigation.navigate('Page2')}
-            name="cart"
-            size={25}
-          />
+        backgroundColor:'white',
+        }} >
+    
+          <TouchableOpacity onPress={() => props.navigation.openDrawer()} style={{paddingTop:5}}>
+            <Thumbnail small style={{marginStart:10}}  source={{uri: 'http://lawlessjakarta.com/wp-content/uploads/2017/09/Lawless_burgerbar_header.gif'}}/>
+          </TouchableOpacity>
+          <Item 
+              rounded 
+              style={{
+                width:230,height:34,
+                boxShadow: "0px 10px 100px 5px black",
+                borderWidth: 3,
+                borderRadius: 10,
+                borderColor: '#ddd',
+                borderBottomWidth: 0,
+                shadowColor: 'black',
+                shadowOffset: { width: 20, height: 2 },
+                shadowOpacity: 0.8,
+                shadowRadius: 5,
+                elevation: 1,
+                marginTop:9,
+                }}>
+              <Input style={{paddingTop:10,paddingStart:20}} placeholder='Search....'
+              onChangeText={(search) => setInput({...input, search: search })}/>
+            </Item>
+            <Icon
+              style={{ paddingRight: 10,marginTop:7,paddingEnd:20,color:'#f6b233',paddingTop:5 }}
+              onPress={() =>props.navigation.navigate(' Addcategories')}
+              name="cart"
+              size={25}
+            />
       </Header>
       <View>
         <View style={{height:50,flexDirection: 'row',justifyContent: 'space-between',paddingEnd:20,paddingStart:20}}>
