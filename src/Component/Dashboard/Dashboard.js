@@ -65,6 +65,34 @@ export default function Dashboard(props) {
             size={25}
           />
       </Header>
+      <View>
+        <View style={{height:50,flexDirection: 'row',justifyContent: 'space-between',paddingEnd:20,paddingStart:20}}>
+          <View style={{width:75,paddingTop:10}}> 
+            <Button rounded small warning
+               onPress={() => setInput({...input, sort: 'date_updated' })}>
+              <Text style={{fontSize:11}}>Update</Text>
+            </Button>
+          </View>
+          <View style={{width:60,paddingTop:10}}> 
+            <Button rounded small warning
+               onPress={() => setInput({...input, sort: 'date_added' })}>
+              <Text style={{fontSize:11}}>New</Text>
+            </Button>
+          </View>
+          <View style={{width:65,paddingTop:10}} > 
+            <Button rounded small warning
+               onPress={() => setInput({...input, sort: 'name' })}>
+              <Text style={{fontSize:11}}>Name</Text>
+            </Button>
+          </View>
+          <View style={{width:100,paddingTop:10}}>  
+            <Button rounded small warning onPress={() => setInput({...input, sort: 'Categories' })}>
+              <Text style={{fontSize:11}}>Categories</Text>
+            </Button>
+          </View>
+
+        </View>
+      </View>
      <Content>
       <View style={{flexDirection: 'column',alignItems:'center'}}>
       <ScrollView>

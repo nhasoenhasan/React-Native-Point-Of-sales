@@ -54,7 +54,7 @@ export default function Addproduct(props) {
                         <Item style={{marginTop:15}}>
                             <Input placeholder="Insert Price ...." 
                             onChangeText={(price) => setInput({...input, price: price })}/>
-                            <Input />
+                            <Input/>
                         </Item>
                         <Item style={{marginTop:15}}>
                             <Picker
