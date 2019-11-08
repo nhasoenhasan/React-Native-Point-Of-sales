@@ -15,6 +15,12 @@ import Addproduct from './Component/Dashboard/Addproduct';
 import Editproduct from './Component/Dashboard/Editproduct';
 import Chart from './Component/Dashboard/Chart';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import { Container, Header, Content, Button,Text,Thumbnail } from 'native-base';
+import {
+  View,
+  TouchableOpacity
+} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
   //Welcome Screen
   const NavigatorHome = createStackNavigator(
@@ -110,13 +116,40 @@ import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
   );
 
 
+    const CustomDrawerContentComponent = ({navigation}) =>{
+      const deleteToken = async () => {
+        try {
+          await AsyncStorage.removeItem('xaccess-token')
+          navigation.navigate('NavigatorHome')
+        } catch (err) {
+          console.log(`The error is: ${err}`)
+        }
+      }
+      return(
+        <Container>
+        <View style={{backgroundColor:'white',height:100,paddingTop:30,alignItems:'center'}}>
+          <Thumbnail large source={{uri:'https://avatars3.githubusercontent.com/u/23376494?s=460&v=4'}} />
+        </View>
+        <Content>
+          <View style={{alignItems:'center',marginTop:30}}>
+              <Button onPress = { deleteToken} rounded danger style={{height:30}}>
+                <Text>Logout</Text>
+              </Button>
+          </View>
+        </Content>
+        
+      </Container>
+      )
+    }
   //Drawer Dashboard
   const NavigatorDashboard =  createDrawerNavigator(
     {
-      Dashboard: { screen: DashboardStackNavigator},
+      Dashboard: { screen: DashboardStackNavigator}
       },
       {
+        contentComponent:CustomDrawerContentComponent,
         contentOptions: {
+        drawerLabel: 'Dashboard',
         activeTintColor: '#e91e63',
       }
     }
@@ -124,6 +157,7 @@ import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 
   //Switch Navigator
   const Router = createSwitchNavigator(
+    
     {
       NavigatorHome,
       NavigatorDashboard,

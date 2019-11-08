@@ -3,7 +3,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  StatusBar
 } from 'react-native';
 import {Content, Container,Card, CardItem, Header, Item, Input, Button, Text, Thumbnail, Left, Body, Right } from 'native-base';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
@@ -33,14 +34,15 @@ export default function Dashboard(props) {
   const product = useSelector(state => state.product.productList)
 	return (
     <Container >
+      
       <Header style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor:'white',
         }} >
     
-          <TouchableOpacity onPress={() => props.navigation.openDrawer()} style={{paddingTop:5}}>
-            <Thumbnail small style={{marginStart:10}}  source={{uri: 'http://lawlessjakarta.com/wp-content/uploads/2017/09/Lawless_burgerbar_header.gif'}}/>
+          <TouchableOpacity onPress={() => props.navigation.openDrawer()} style={{paddingTop:8}}>
+            <Thumbnail small style={{marginStart:10}}  source={{uri: 'https://avatars3.githubusercontent.com/u/23376494?s=460&v=4'}}/>
           </TouchableOpacity>
           <Item 
               rounded 
@@ -69,6 +71,7 @@ export default function Dashboard(props) {
             />
       </Header>
       <View>
+      <StatusBar backgroundColor="#f6b233" barStyle="light-content" />
         <View style={{height:50,flexDirection: 'row',justifyContent: 'space-between',paddingEnd:20,paddingStart:20}}>
           <View style={{width:75,paddingTop:10}}> 
             <Button rounded small warning
@@ -97,20 +100,32 @@ export default function Dashboard(props) {
         </View>
       </View>
      <Content>
-      <View style={{flexDirection: 'column',alignItems:'center'}}>
+      <View >
       <ScrollView>
         {product.map(item=>{
           return(
-            <Card style={{width:300,backgroundColor:'black'}}>
-              <CardItem cardBody>
-                <Image  source={{uri:item.image}} style={{height: 200, width: null, flex: 1}}/>
-              </CardItem>
-              <CardItem style={{width:300,backgroundColor:'black'}}>  
-                <Left>
-                  <Text style={{color:'white'}}>{item.name}</Text>
-                </Left>
-              </CardItem>
-            </Card>
+            <View style={{paddingStart:5,paddingEnd:5}}>
+              <Card>
+                  <CardItem  style={{backgroundColor:'black'}}>
+                  <Body style={{flexDirection:'row'}} >
+                      <View style={{paddingTop:10}}>
+                          <Thumbnail square large source={{uri: item.image}} />
+                      </View>
+                      <View style={{flexDirection: 'column',paddingStart:10,width:'77%'}}>
+                          <Text style={{color:'white'}}>{item.name}</Text>
+                          <Text  style={{color:'white'}} >Rp.{item.price}</Text>
+                          <Text  style={{color:'white'}} >Quantity {item.quantity}</Text>
+                      </View>
+                      
+                  </Body>
+                  <View style={{width:60}} >
+                        <Button small rounded success>
+                          <Text>Add</Text>
+                        </Button>
+                      </View>
+                  </CardItem>
+              </Card>
+          </View>
           )
         })}
       </ScrollView>

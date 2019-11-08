@@ -4,7 +4,8 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Alert
+  Alert,
+  StatusBar
 } from 'react-native';
 import {deleteProduct} from '../Public/Redux/Actions/product';
 import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text, Left,Icon,Fab,Button,Right } from 'native-base';
@@ -49,6 +50,7 @@ export default function Product(props) {
                 {product.map(item=>{
                     return(
                     <View style={{paddingStart:5,paddingEnd:5}}>
+                      <StatusBar backgroundColor="#f6b233" barStyle="light-content"/>
                         <Card >
                             <CardItem>
                             <Body style={{flexDirection:'row'}} >

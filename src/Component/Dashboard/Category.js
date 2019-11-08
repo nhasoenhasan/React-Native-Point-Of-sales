@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   Modal,
-  Alert
+  Alert,
+  StatusBar
 } from 'react-native';
 import { 
   Thumbnail,
@@ -22,7 +23,7 @@ import {
   Button, 
   Icon, 
   Fab ,
-  Right,
+  Right
    } from 'native-base';
 import { useSelector,useDispatch  } from 'react-redux';
 import {getCategories} from '../Public/Redux/Actions/categories';
@@ -83,10 +84,12 @@ export default function Category(props) {
                 <Text>Management Categories</Text>
             </Header>
             <Content >
+           
             <ScrollView>
                 {categories.map(item=>{
                     return(
                     <View style={{paddingStart:5,paddingEnd:5}}>
+                       <StatusBar backgroundColor="#f6b233" barStyle="light-content"/>
                         <Card >
                             <CardItem>
                             <Body style={{flexDirection:'row'}} >
