@@ -81,7 +81,7 @@ export default function Category(props) {
 	return (
         <Container>
             <Header style={{backgroundColor:'white'}}>
-                <Text>Management Categories</Text>
+                <Text style={{paddingTop:14,fontWeight:'bold'}}>Management Categories</Text>
             </Header>
             <Content >
            
@@ -96,22 +96,25 @@ export default function Category(props) {
                                 <View style={{flexDirection: 'column',paddingStart:10,width:'77%'}}>
                                     <Text >{item.Categories}</Text>
                                 </View>
-                                  <Right>
+                                <View>
                                   <TouchableOpacity
-                                    onPress={() =>
-                                      props.navigation.navigate('Editcategories',{
-                                        name:item.Categories,
-                                        id:item.id_categories
-                                      })
-                                    }>
-                                    <Icon type="Ionicons" name="md-create" style={{fontSize: 20, color: 'green',paddingEnd:30}} />
-                                  </TouchableOpacity> 
-                                  </Right>
-                                  <TouchableOpacity
-                                    onPress={()=>{onShow(item)}}
-                                  >
-                                    <Icon type="Ionicons" name="ios-trash" style={{fontSize: 20, color: 'red',paddingStart:5}} />
-                                  </TouchableOpacity>
+                                      onPress={() =>
+                                        props.navigation.navigate('Editcategories',{
+                                          name:item.Categories,
+                                          id:item.id_categories
+                                        })
+                                      }>
+                                      <Icon type="Ionicons" name="md-create" style={{fontSize: 30, color: 'green',paddingEnd:30}} />
+                                    </TouchableOpacity> 
+                                </View>
+                                <View>
+                                <TouchableOpacity
+                                      onPress={()=>{onShow(item)}}
+                                      style={{marginRight:20}}
+                                    >
+                                      <Icon type="Ionicons" name="ios-trash" style={{fontSize: 30, color: 'red',paddingStart:5,marginEnd:30}} />
+                                    </TouchableOpacity>
+                                </View>
                             </Body>
                             </CardItem>
                         </Card>
@@ -121,16 +124,18 @@ export default function Category(props) {
             </ScrollView>
               
             </Content>
-            <Fab
-              containerStyle={{ }}
-              style={{ backgroundColor: '#f6b233', }}
-              position="bottomRight"
-              onPress={() =>
-                props.navigation.navigate('Addcategories')
-              }
-             >
-              <Icon name="add" />
-            </Fab>
+            <View >
+                <Fab
+                  containerStyle={{ }}
+                  style={{ backgroundColor: '#f6b233', }}
+                  position="bottomRight"
+                  onPress={() =>
+                    props.navigation.navigate('Addcategories')
+                  }
+                  >
+                  <Icon name="add" />
+                </Fab>
+              </View>
            
         </Container>	
 	);

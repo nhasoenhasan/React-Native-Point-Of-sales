@@ -4,7 +4,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Button,Container, Header, Content, Form, Item, Input } from 'native-base';
+import { Button,Container, Header, Content, Form, Item, Input,Toast } from 'native-base';
 import { useDispatch } from "react-redux";
 
 export default function Register(props) {
@@ -17,16 +17,27 @@ export default function Register(props) {
 		dispatch(postRegister (input))
 		.then(response => {
 		if (response.value.data.status === 200) {
-			alert(response.value.data.message);
+			
+			Toast.show({
+				position: "top",
+				duration: 3000,
+				text: response.value.data.message,
+				buttonText: 'Okay',
+				type: "success"
+			  })
 			props.navigation.navigate('Login')
 		} else {
-			alert(response.value.data.message);
+			Toast.show({
+				position: "top",
+				text: response.value.data.message,
+				duration: 3000,
+				buttonText: 'Okay',
+				type: "danger"
+			  })
 		}
 		})
 		.catch(error => alert(error));
 	};
-
-	console.log(input)
 
 	return (
 

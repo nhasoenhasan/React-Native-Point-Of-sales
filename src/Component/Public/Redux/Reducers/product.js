@@ -3,6 +3,7 @@ const initialState = {
     isLoading: false,
     isRejected: false,
     isFulfilled: false,
+    orderResponse:[],
     addedItems:[],
     total: 0,
     orderResponse:[]
@@ -106,7 +107,80 @@ const initialState = {
           isFulfilled: true,
           productList:productListAfterPatch
         };
-      
+      //ADD TO CHART
+      case 'ADD_TO_CART':
+        let addedItem = state.productList.find(item=> item.id_product === action.id)
+            //check if the action id exists in the addedItems
+        let existed_item= state.addedItems.find(item=> action.id === item.id_product)
+            
+        if(existed_item)
+        {
+            addedItem.quantity += 1 
+            return{
+                ...state,
+                total: state.total + addedItem.price 
+                  }
+        }
+        else{
+            addedItem.quantity = 1;
+                
+            return{
+                 ...state,
+                addedItems: [...state.addedItems, addedItem],
+                total : state.total + addedItem.price
+            }
+                
+        }
+
+        //ADD QUANTITY
+        case 'ADD_QUANTITY':
+          let addeQuantity = state.addedItems.find(item=> item.id_product === action.id)
+          addeQuantity.quantity += 1 
+          let Totaladd = state.total + addeQuantity.price
+          return{
+              ...state,
+              total: Totaladd
+          }
+        //SUB QUANTITY
+        case 'SUB_QUANTITY':
+            let subQuantity = state.addedItems.find(item=> item.id_product === action.id)
+            subQuantity.quantity -= 1 
+            let Totalsub = state.total - subQuantity.price
+            return{
+              ...state,
+                total: Totalsub
+            }
+        case 'REMOVE_ITEM':
+          let itemToRemove= state.addedItems.find(item=> action.id === item.id_product)
+          let new_items = state.addedItems.filter(item=> action.id !== item.id_product)
+              
+          //calculating the total
+          let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
+          return{
+            ...state,
+            addedItems: new_items,
+            total: newTotal
+          }
+       case 'POST_ORDER':
+            return {
+              ...state,
+              isLoading: true,
+              isRejected: false,
+              isFulfilled: false,
+            };
+        case 'POST_ORDER_REJECTED':
+            return {
+              ...state,
+              isLoading: false,
+              isRejected: true,
+            };
+        case 'POST_ORDER_FULFILLED':
+            return {
+              ...state,
+              isLoading: false,
+              isFulfilled: true,
+              orderResponse: action.payload.data,
+            };
       default:
         return state;
     }

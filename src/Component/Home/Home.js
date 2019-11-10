@@ -6,7 +6,7 @@ import {
   StatusBar
 } from 'react-native';
 
-import { Button,Text,Thumbnail} from 'native-base';
+import { Button,Text,Thumbnail,Toast} from 'native-base';
 
 export default function Home(props) {
 	
@@ -32,13 +32,13 @@ export default function Home(props) {
 					}
 					rounded >
 					<Text style={{
-						fontWeight:"bold",fontSize: 20}} >Buat Akun</Text>
+						fontWeight:"bold",fontSize: 16}} >Create an account</Text>
 				</Button>
 			<View style={{width: 50, height: 50}} />
 			<View style={{width: "70%", height: 50,alignItems:'flex-start' }}>
-				<Text style={{color:"white",justifyContent: 'flex-start'}}>Sudah Punya Akun?<Text style={{color:"#fbb130"}} onPress={() =>
+				<Text style={{color:"white",justifyContent: 'flex-start'}}>Already have an account?<Text style={{color:"#fbb130"}} onPress={() =>
 						props.navigation.navigate('Login')
-					}>Masuk</Text></Text>
+					}>  Signin</Text></Text>
 			</View>
 		</View>
 	);

@@ -115,7 +115,7 @@ import AsyncStorage from '@react-native-community/async-storage';
     },
   );
 
-
+    //DRAWER CUSTOM
     const CustomDrawerContentComponent = ({navigation}) =>{
       const deleteToken = async () => {
         try {

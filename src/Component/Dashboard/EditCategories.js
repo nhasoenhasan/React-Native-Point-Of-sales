@@ -45,9 +45,6 @@ export default function Editcategories(props) {
                             value={input.Categories}/>
                             <Input />
                         </Item>
-                        <Item>
-                            <Input ></Input>
-                        </Item>
                         <Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}}
 						 onPress={handleSubmit} rounded>
 						<Text style={{fontWeight:"bold",fontSize: 17}}>Add </Text>

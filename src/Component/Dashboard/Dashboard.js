@@ -10,6 +10,7 @@ import {Content, Container,Card, CardItem, Header, Item, Input, Button, Text, Th
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { useSelector,useDispatch  } from 'react-redux';
 import {getProduct} from '../Public/Redux/Actions/product';
+import { addToCart } from '../Public/Redux/Actions/cartActions';
 
 
 export default function Dashboard(props) {
@@ -30,6 +31,10 @@ export default function Dashboard(props) {
   useEffect(()=>{
     fetchddata()
   },[input])
+
+  const addCart=(item)=>{
+    dispatch(addToCart(item))
+  }
 
   const product = useSelector(state => state.product.productList)
 	return (
@@ -119,7 +124,7 @@ export default function Dashboard(props) {
                       
                   </Body>
                   <View style={{width:60}} >
-                        <Button small rounded success>
+                        <Button small rounded success onPress={()=>{addCart(item.id_product)}}>
                           <Text>Add</Text>
                         </Button>
                       </View>
