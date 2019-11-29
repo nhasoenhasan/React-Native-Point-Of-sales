@@ -47,7 +47,7 @@ const Login = (props) => {
 			flexDirection: 'column',
 			justifyContent: 'space-between',
 			alignItems:'center',
-			backgroundColor:'black'
+			backgroundColor:'#15202b'
 		}}>
 			<View style={{width: 300, height: 50,justifyContent: 'center',marginStart:27,marginTop:10}} >
 				<Text style={{fontWeight:"bold",color:'white',fontSize: 25}}>Signin</Text>
@@ -67,9 +67,9 @@ const Login = (props) => {
 						style={{color:"white"}}/>
 					</Item>
 					
-					<Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}}
+					<Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#e0245e"}}
 						 onPress={handleSubmit} rounded>
-						<Text style={{fontWeight:"bold",fontSize: 17}}>Signin</Text>
+						<Text style={{fontWeight:"bold",fontSize: 17,color:'white'}}>Signin</Text>
 					</Button>
 					
 				</Form>

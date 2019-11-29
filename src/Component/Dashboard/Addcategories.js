@@ -8,6 +8,13 @@ import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text, Left,
 import { useSelector,useDispatch  } from 'react-redux';
 import {postCategories} from '../Public/Redux/Actions/categories';
 
+Addcategories.navigationOptions={
+    headerStyle: {
+        backgroundColor: '#15202b',
+    },
+    headerTintColor: '#fff'
+}
+
 export default function Addcategories(props) {
     const [input, setInput] = useState({ id_categories:"",Categories:"" });
     const dispatch = useDispatch()
@@ -44,19 +51,19 @@ export default function Addcategories(props) {
     // console.log("DATA",navigation.state.params.id)
    
 	return (
-        <Container>
+        <Container style={{backgroundColor: '#15202b'}}>
             <Content >
                 <View style={{width: 300,paddingTop:40,justifyContent: 'center'}}>
                     <Form>
                         {/* <Text>{JSON.stringify(navigation.getparam('passedData','Null'))}</Text> */}
                         <Item>
-                            <Input placeholder="Insert Categories" 
+                            <Input placeholder="Insert Categories"  placeholderTextColor="white"
                             onChangeText={(Categories) => setInput({...input, Categories: Categories })}/>
                             <Input />
                         </Item>
                         <Item>
                         </Item>
-                        <Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}}
+                        <Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#e0245e"}}
 						 onPress={handleSubmit} rounded>
 						<Text style={{fontWeight:"bold",fontSize: 17}}>Add </Text>
 					</Button>

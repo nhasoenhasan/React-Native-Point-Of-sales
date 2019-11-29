@@ -41,18 +41,18 @@ export default function Product(props) {
         );
     }
 	return (
-        <Container>
-            <Header style={{backgroundColor:'white'}}>
-                <Text style={{paddingTop:14,fontWeight:'bold'}}>Management Product</Text>
+        <Container style={{backgroundColor:'#15202b'}}>
+            <Header style={{backgroundColor:'#15202b'}}>
+                <Text style={{paddingTop:14,fontWeight:'bold',color:'white'}}>Management Product</Text>
             </Header>
             <Content >
-            <ScrollView>
+            <ScrollView >
                 {product.map(item=>{
                     return(
-                    <View style={{paddingStart:5,paddingEnd:5}}>
-                      <StatusBar backgroundColor="#f6b233" barStyle="light-content"/>
+                    <View key={item.id_product} >
+                      <StatusBar backgroundColor="#e0245e" barStyle="light-content"/>
                         <Card >
-                            <CardItem>
+                            <CardItem  >
                             <Body style={{flexDirection:'row'}} >
                                 <View style={{flexDirection: 'row',paddingTop:10}}>
                                     <Thumbnail square large source={{uri: item.image}} />
@@ -91,7 +91,7 @@ export default function Product(props) {
             <Fab
               
               containerStyle={{ }}
-              style={{ backgroundColor: '#f6b233', }}
+              style={{ backgroundColor: '#e0245e', }}
               position="bottomRight"
               onPress={() =>
                 props.navigation.navigate('AddProduct')

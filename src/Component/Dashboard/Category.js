@@ -79,17 +79,17 @@ export default function Category(props) {
   
 
 	return (
-        <Container>
-            <Header style={{backgroundColor:'white'}}>
-                <Text style={{paddingTop:14,fontWeight:'bold'}}>Management Categories</Text>
+        <Container style={{backgroundColor:'#15202b'}}>
+            <Header style={{backgroundColor:'#15202b'}}>
+                <Text style={{paddingTop:14,fontWeight:'bold',color:'white'}}>Management Categories</Text>
             </Header>
             <Content >
            
             <ScrollView>
                 {categories.map(item=>{
                     return(
-                    <View style={{paddingStart:5,paddingEnd:5}}>
-                       <StatusBar backgroundColor="#f6b233" barStyle="light-content"/>
+                    <View key={item.id_categories} style={{paddingStart:5,paddingEnd:5}}>
+                       <StatusBar backgroundColor="#e0245e" barStyle="light-content"/>
                         <Card >
                             <CardItem>
                             <Body style={{flexDirection:'row'}} >
@@ -127,7 +127,7 @@ export default function Category(props) {
             <View >
                 <Fab
                   containerStyle={{ }}
-                  style={{ backgroundColor: '#f6b233', }}
+                  style={{ backgroundColor: '#e0245e', }}
                   position="bottomRight"
                   onPress={() =>
                     props.navigation.navigate('Addcategories')

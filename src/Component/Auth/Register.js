@@ -46,7 +46,7 @@ export default function Register(props) {
 			flexDirection: 'column',
 			justifyContent: 'space-between',
 			alignItems:'center',
-			backgroundColor:'black'
+			backgroundColor:'#15202b'
 		}}>
 			<View style={{width: 300, height: 50,justifyContent: 'center',marginStart:27,marginTop:10}} >
 				<Text style={{fontWeight:"bold",color:'white',fontSize: 25}}>Make Account</Text>
@@ -71,10 +71,10 @@ export default function Register(props) {
 					</Item>
 					
 					<Button 
-					style={{marginTop:20,width:150,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}} 
+					style={{marginTop:20,width:150,marginStart:15,justifyContent: 'center',backgroundColor:"#e0245e"}} 
 					onPress={handleSubmit}
 					rounded>
-						<Text style={{fontWeight:"bold",fontSize: 17}}>Register</Text>
+						<Text style={{fontWeight:"bold",fontSize: 17,color:'white'}}>Register</Text>
 					</Button>
 					
 				</Form>

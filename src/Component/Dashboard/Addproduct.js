@@ -8,6 +8,13 @@ import { Picker,Thumbnail,Container, Header, Content, Card, CardItem, Body, Text
 import { useSelector,useDispatch  } from 'react-redux';
 import {postProduct} from '../Public/Redux/Actions/product';
 
+Addproduct.navigationOptions={
+    headerStyle: {
+        backgroundColor: '#15202b',
+    },
+    headerTintColor: '#fff'
+}
+
 export default function Addproduct(props) {
     const [input, setInput] = useState({id_product:"",name: "", description: "",image: "",id_categories: "",price:"" ,quantity:"" });
     const [categories, setCategories]=useState({Categories:""})
@@ -47,43 +54,47 @@ export default function Addproduct(props) {
     const category = useSelector(state => state.categories.categoriesList)
    
 	return (
-        <Container>
+        <Container style={{backgroundColor: '#15202b'}}>
             <Content >
                 <View style={{paddingTop:30,justifyContent: 'center'}}>
                     <Form>
                         <Item >
-                            <Input placeholder="Insert Name...." 
+                            <Input 
+                            placeholder="Insert Name...." 
+                            placeholderTextColor="white" 
                             onChangeText={(name) => setInput({...input, name: name })}
                              />
                         </Item>
                         <Item style={{marginTop:15}}>
-                            <Textarea style={{paddingTop:30}} placeholder="Insert Description" onChangeText={(description) => setInput({...input, description:description})} rowSpan={5}   />
+                            <Textarea style={{paddingTop:30}} placeholderTextColor="white" placeholder="Insert Description" onChangeText={(description) => setInput({...input, description:description})} rowSpan={5}   />
                         </Item>
                         <Item style={{marginTop:15}}>
-                            <Input placeholder="Insert Url ...." 
+                            <Input placeholder="Insert Url ...."  placeholderTextColor="white"
                             onChangeText={(image) => setInput({...input, image: image })}/>
                         </Item>
                         <Item style={{marginTop:15}}>
-                            <Input placeholder="Insert Price ...." 
+                            <Input placeholder="Insert Price ...." placeholderTextColor="white"
                             onChangeText={(price) => setInput({...input, price: price })}
                             />
                         </Item>
                         <Item style={{marginTop:15}}>
                             <Picker
+                                
                                 selectedValue={input.id_categories}
                                 style={{height: 50, width: 100}}
+                                style={{color:'white'}}
                                 onValueChange={(itemValue, itemIndex) =>
                                     setInput({...input,id_categories: itemValue})
                                 }>
                                 {category.map(item=>{
                                     return(
-                                        <Picker.Item label={item.Categories} value={item.id_categories} />
+                                        <Picker.Item  label={item.Categories} value={item.id_categories} />
                                     )
                                 })}
                             </Picker>
                         </Item>
                         <Item style={{marginTop:15}}>
-                            <Input placeholder="Insert Quantity ...." 
+                            <Input placeholder="Insert Quantity ...."  placeholderTextColor="white"
                             onChangeText={(quantity) => setInput({...input, quantity: quantity })}/>
                         </Item>
                         <Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#fbb130"}}

@@ -14,6 +14,7 @@ import Editcategories from './Component/Dashboard/EditCategories';
 import Addproduct from './Component/Dashboard/Addproduct';
 import Editproduct from './Component/Dashboard/Editproduct';
 import Chart from './Component/Dashboard/Chart';
+import AuthLoading from './Component/Auth/AuthLoadingScreen';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { Container, Header, Content, Button,Text,Thumbnail } from 'native-base';
 import {
@@ -32,7 +33,7 @@ import AsyncStorage from '@react-native-community/async-storage';
       {
         defaultNavigationOptions: {
           headerStyle: {
-            backgroundColor: 'black',
+            backgroundColor: '#15202b',
           },
           headerTintColor: '#fff',
         },
@@ -80,20 +81,11 @@ import AsyncStorage from '@react-native-community/async-storage';
           ),
           tabBarLabel:'Product'
         }
-      },
-      Chart:{
-        screen:Chart,
-        navigationOptions: {
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Icon size={30} name="cart" style={{ color: tintColor }} />
-          ),
-          tabBarLabel:'Product'
-        }
       }
     },
     {
-      activeColor: '#f6b233',
-      barStyle: { backgroundColor: '#ffffff' }
+      activeColor: '#e0245e',
+      barStyle: { backgroundColor: '#15202b' }
     }
     
   );
@@ -111,7 +103,12 @@ import AsyncStorage from '@react-native-community/async-storage';
       Editcategories:Editcategories,
       AddProduct:Addproduct,
       Editproduct:Editproduct,
-
+      Chart:{
+        screen:Chart,
+        navigationOptions: {
+          tabBarVisible : false
+        }
+      }
     },
   );
 
@@ -128,7 +125,7 @@ import AsyncStorage from '@react-native-community/async-storage';
       return(
         <Container>
         <View style={{backgroundColor:'white',height:100,paddingTop:30,alignItems:'center'}}>
-          <Thumbnail large source={{uri:'https://avatars3.githubusercontent.com/u/23376494?s=460&v=4'}} />
+          <Thumbnail large source={{uri:'https://image.flaticon.com/icons/svg/1246/1246351.svg'}} />
         </View>
         <Content>
           <View style={{alignItems:'center',marginTop:30}}>
@@ -159,11 +156,12 @@ import AsyncStorage from '@react-native-community/async-storage';
   const Router = createSwitchNavigator(
     
     {
+      AuthLoading,
       NavigatorHome,
       NavigatorDashboard,
     },
     {
-      initialRouteName: 'NavigatorHome',
+      initialRouteName: 'AuthLoading',
       headerMode: 'none',
     }
   );

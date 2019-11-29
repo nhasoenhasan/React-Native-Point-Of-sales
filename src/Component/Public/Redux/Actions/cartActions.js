@@ -34,6 +34,6 @@ export const postOrder=(input,total)=>{
     // console.log("DATA INPUT",inputs)
     return{
         type: 'POST_ORDER',
-        payload:axios.post('https://pointofsaleshasan.herokuapp.com/product/order',{body: {subtotal:total,order:input}})
+        payload:axios.post('https://poswebsite.herokuapp.com/product/order',{body: {subtotal:total,order:input}})
     }
   }
