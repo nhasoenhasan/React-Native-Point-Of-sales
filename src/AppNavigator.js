@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from 'react-native';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -15,8 +16,9 @@ import Addproduct from './Component/Dashboard/Addproduct';
 import Editproduct from './Component/Dashboard/Editproduct';
 import Chart from './Component/Dashboard/Chart';
 import AuthLoading from './Component/Auth/AuthLoadingScreen';
+import Orderhistory from './Component/Dashboard/Orderhistory';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
-import { Container, Header, Content, Button,Text,Thumbnail } from 'native-base';
+import { Container,List, ListItem, Content, Button,Text,Thumbnail,Switch,Left,Right,Body } from 'native-base';
 import {
   View,
   TouchableOpacity
@@ -103,6 +105,7 @@ import AsyncStorage from '@react-native-community/async-storage';
       Editcategories:Editcategories,
       AddProduct:Addproduct,
       Editproduct:Editproduct,
+      Orderhistory,
       Chart:{
         screen:Chart,
         navigationOptions: {
@@ -122,26 +125,46 @@ import AsyncStorage from '@react-native-community/async-storage';
           console.log(`The error is: ${err}`)
         }
       }
+
       return(
-        <Container>
-        <View style={{backgroundColor:'white',height:100,paddingTop:30,alignItems:'center'}}>
-          <Thumbnail large source={{uri:'https://image.flaticon.com/icons/svg/1246/1246351.svg'}} />
-        </View>
-        <Content>
-          <View style={{alignItems:'center',marginTop:30}}>
-              <Button onPress = { deleteToken} rounded danger style={{height:30}}>
-                <Text>Logout</Text>
-              </Button>
+        <Container style={{backgroundColor: '#15202b'}}>
+          <View style={{sheight:100,paddingTop:30,alignItems:'center'}}>
+            <Thumbnail large source={{uri:'https://scontent-sin6-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/72771346_453959675315642_344653513424789892_n.jpg?_nc_ht=scontent-sin6-1.cdninstagram.com&_nc_cat=1&oh=5059274e73031ab025ea2a174caf23cd&oe=5E69FE3C'}} />
           </View>
-        </Content>
-        
+          <Content style={{marginTop:'10%'}}>
+            <List>
+              <ListItem itemDivider style={{backgroundColor:'#e0245e',alignItems:'center'}}>
+                <Text style={{color:'white'}}>Cashier</Text>
+              </ListItem>
+              <ListItem >
+                <Body>
+                <TouchableOpacity onPress={() =>navigation.navigate('Orderhistory')} >
+                  <Text style={{color:'white'}}> Transaction</Text>
+                </TouchableOpacity>
+                </Body>
+                  <TouchableOpacity onPress={() =>navigation.navigate('Orderhistory')} >
+                    <Icon size={23} name="chart-areaspline" style={{ color: '#e0245e'}} />
+                  </TouchableOpacity>
+              </ListItem>
+              <ListItem >
+                <Body>
+                  <Text style={{color:'white'}}> Log out</Text>
+                </Body>
+                <Right>
+                  <TouchableOpacity onPress={deleteToken} >
+                    <Icon size={23} name="logout" style={{ color: '#e0245e'}} />
+                  </TouchableOpacity>
+                </Right>
+              </ListItem>
+            </List>
+          </Content>
       </Container>
       )
     }
   //Drawer Dashboard
   const NavigatorDashboard =  createDrawerNavigator(
     {
-      Dashboard: { screen: DashboardStackNavigator}
+      Dashboard: { screen: DashboardStackNavigator},
       },
       {
         contentComponent:CustomDrawerContentComponent,

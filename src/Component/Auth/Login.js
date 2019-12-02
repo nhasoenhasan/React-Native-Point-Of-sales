@@ -4,43 +4,42 @@ import {postLogin} from '../Public/Redux/Actions/auth';
 import {
   Text,
   View,
+  Alert
 } from 'react-native';
 
-import { Button,Container, Header, Content, Form, Item, Input,Toast } from 'native-base';
-import { useDispatch } from "react-redux";
+import { Button,Spinner, Content, Form, Item, Input,Toast } from 'native-base';
+import { useDispatch,useSelector } from "react-redux";
 
 const Login = (props) => {
     const [input, setInput] = useState({ username: "", password: "" ,token:""});
 	const dispatch = useDispatch();
+	const isLoading=useSelector(state=>state.auth.isLoading)
 
 	//On Submit Login Data
 	const handleSubmit = async (event) => {
-		dispatch(postLogin (input))
-		.then(response => {
-		if  ( response.value.data.status === 200) {
-				Toast.show({
-				position: "top",
-				duration: 3000,
-				text: response.value.data.message,
-				buttonText: 'Okay',
-				type: "success"
-			  })
-			props.navigation.navigate('NavigatorDashboard')
-			
-		} else {
-			Toast.show({
-				position: "top",
-				text: response.value.data.message,
-				duration: 3000,
-				buttonText: 'Okay',
-				type: "danger"
-			  })
+		if(input.username===''||input.password===''){
+			Alert.alert('Data Cant be empty')
+		}else{
+			dispatch(postLogin (input))
+			.then(response => {
+				if  ( response.value.data.status === 200) {
+						Toast.show({
+						position: "top",
+						duration: 3000,
+						text: response.value.data.message,
+						buttonText: 'Okay',
+						type: "success"
+					})
+					props.navigation.navigate('NavigatorDashboard')
+					
+				} else {
+					Alert.alert(response.value.data.message)
+				}
+			})
+			.catch(error => alert(error));
 		}
-		})
-		.catch(error => alert(error));
 	};
 
-	console.log(input)
 	return (
 		<View style={{
 			flex: 1,
@@ -67,10 +66,12 @@ const Login = (props) => {
 						style={{color:"white"}}/>
 					</Item>
 					
-					<Button style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#e0245e"}}
-						 onPress={handleSubmit} rounded>
-						<Text style={{fontWeight:"bold",fontSize: 17,color:'white'}}>Signin</Text>
+					<Button 
+						style={{marginTop:20,width:120,marginStart:15,justifyContent: 'center',backgroundColor:"#e0245e"}}
+						onPress={handleSubmit} rounded>
+						{isLoading===true?<Spinner color='#15202b' />:<Text style={{fontWeight:"bold",fontSize: 17,color:'white'}}>Signin</Text>}	
 					</Button>
+					
 					
 				</Form>
 			</View>

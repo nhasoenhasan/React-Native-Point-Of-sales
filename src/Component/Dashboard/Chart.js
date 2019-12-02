@@ -1,10 +1,10 @@
 import React, { useState,useEffect } from 'react';
 import {useSelector,useDispatch} from 'react-redux';
-import { Text,View } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Body,Thumbnail,Button } from 'native-base';
+import { Text,View,Alert,Image } from 'react-native';
+import { Container,Spinner, Content, Card, CardItem, Body,Thumbnail,Button } from 'native-base';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { addQuantity,subtractQuantity,removeItem,postOrder} from '../Public/Redux/Actions/cartActions';
-import { connect } from 'react-redux';
+import Cartillustration from '../../Assets/Images/Cart.png';
 
 Cart.navigationOptions={
     headerStyle: {
@@ -19,13 +19,11 @@ export default function Cart(props){
         id_product:"",
         name:"",
         total:"",
-        image:"",
-        
+        qty:" ",
     });
+    const[isLoading,setisLoading]=useState(false);
 
-    const [Total, setTotal]=useState({
-        sub_total:""
-    });
+    const [Total, setTotal]=useState();
 
     const items = useSelector(state => state.product.addedItems)
     const Totals = useSelector(state => state.product.total)
@@ -33,12 +31,12 @@ export default function Cart(props){
 
 
     useEffect(()=>{
-        setInput({ ...props.items})
-    },[props.items])
+        setInput({ ...items})
+    },[items])
 
     useEffect(()=>{
-        setTotal({ sub_total:props.Total})
-    },[props.Total])
+        setTotal(Totals)
+    },[Totals])
 
     const handleAddQuantity =(id)=>{
         dispatch(addQuantity(id));
@@ -53,63 +51,83 @@ export default function Cart(props){
     }
 
     const handlecheckout = async()=>{
+        setisLoading(true)
         try {
-            await dispatch(postOrder(input,Total))
+             const result = await dispatch(postOrder(input,Totals))
+             if(result.action.payload.data.status===200){
+                setisLoading(false)
+                Alert.alert(result.action.payload.data.message)
+             }else{
+                setisLoading(false)
+                Alert.alert(result.action.payload.data.message)
+             }
         } catch (error) {
-            console.log(error)
+            setisLoading(false)
+            Alert.alert(error)
         }
     }
     
     return (
         <Container style={{backgroundColor:'#15202b'}}>
             <Content>
-            {items.map(item=>{
+            {items.length===0?
+            <View style={{alignItems:'center',paddingTop:'10%'}}>
+                <Image source={Cartillustration} style={{resizeMode: 'contain',height: 320}}/>
+                <Text style={{color:'white',fontSize:23,fontWeight:'bold'}}>Your Cart is Empty</Text>
+            </View>
+            :
+            items.map(item=>{
                 return(
-                <View key={item.id_product} style={{padding:10}}>
-                    <Card style={{height:140}}>
+                <View key={item.id_product} style={{padding:'2%'}}>
+                    <Card>
                         <CardItem>
-                        <Body style={{flexDirection:'row',marginTop:12}}>
-                            <Thumbnail source={{uri:item.image}} square large  />
-                            <View style={{flexDirection:'column',paddingLeft:10}}>
-                                <Text style={{paddingBottom:5}}>{item.name}</Text>
-                                <Text style={{paddingBottom:5}}>Price</Text>
+                        <Body style={{flex:1,flexDirection:'row',justifyContent:'space-between'}}>
+                            <View style={{width:'30%',height:100,padding:'3%'}}>
+                                <Thumbnail source={{uri:item.image}} square large  />
                             </View>
-                            <View style={{paddingLeft:35,flexDirection:'row',paddingTop:50}}>
+                            <View style={{width:'35%',height:100,padding:'3%',justifyContent:'center'}}>
+                                <Text>{item.name}</Text>
+                            </View>
+                            <View style={{width:'35%',height:100,flexDirection:'row',justifyContent:'space-between'}}>
+                                <View style={{justifyContent:'center',width:'33%',padding:'7%'}}>
                                     <Button onPress={()=>handleAddQuantity(item.id_product)} style={{width:20,justifyContent:'center',backgroundColor:'#e0245e'}} small >
                                         <Icon style={{color:'white'}}name="plus"></Icon>
                                     </Button>
-                                    <View style={{justifyContent:'center',paddingLeft:10,paddingRight:10}}>
-                                        <Text>
-                                            {item.quantity}
-                                        </Text>
-                                    </View>
-                                    <Button onPress={()=>{handleSubtractQuantity(item.id_product,item.quantity)}} style={{width:20,justifyContent:'center',backgroundColor:'#e0245e'}}  small>
-                                        <Icon name="minus" style={{color:'white'}}></Icon>
-                                    </Button>
+                                </View>
+                                <View style={{justifyContent:'center'}}>
+                                    <Text >
+                                        {item.quantity}
+                                    </Text>
+                                </View>
+                                <View style={{justifyContent:'center',width:'35%',padding:'7%'}}>
+                                <Button onPress={()=>{handleSubtractQuantity(item.id_product,item.quantity)}} style={{width:20,justifyContent:'center',backgroundColor:'#e0245e'}}  small>
+                                    <Icon name="minus" style={{color:'white'}}></Icon>
+                                </Button>
+                                </View>
                             </View>
-
                         </Body>
                         </CardItem>
                     </Card>
-                </View> 
+                </View>
                 )
-              })} 
-
-             
+              })
+            }
             </Content>
             <View >
-                <View style={{justifyContent:'flex-start',marginBottom:6,marginLeft:5,paddingTop:10}}>
-            <Text style={{fontWeight:'bold',color:'white'}}>Total: Rp.{Totals}</Text>
+                {items.length===0?
+                <View></View>
+                :
+                <View>
+                    <View style={{justifyContent:'flex-start',marginBottom:6,marginLeft:5,paddingTop:10}}>
+                        <Text style={{fontWeight:'bold',color:'white'}}>Total: Rp.{Totals}</Text>
+                    </View>
+                    <Button onPress={()=>{handlecheckout()}} style={{justifyContent:'center',backgroundColor:'#e0245e'}} >
+                        {isLoading===true?<Spinner color='15202b'/>:<Text style={{fontWeight:'bold',color:'white',fontSize:18}}> checkout </Text>}
+                    </Button>
                 </View>
-               <Button onPress={()=>{handlecheckout()}} style={{justifyContent:'center',backgroundColor:'#e0245e'}} >
-                    <Text style={{fontWeight:'bold',color:'white',fontSize:18}}> checkout </Text>
-                </Button>
+                }
             </View>
         </Container>
     );
   
 }
-
-
-
-// export default connect (mapStateToProps,mapDispatchToProps) (Cart);

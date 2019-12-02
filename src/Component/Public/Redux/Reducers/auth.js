@@ -4,7 +4,6 @@ const initialState = {
     registerResponse: [],
     registerMessage:'',
     registerStatus:'',
-    //Login
     loginResponse: [],
     loginMessage:'',
     loginStatus:'',

@@ -3,40 +3,33 @@ import {postRegister} from '../Public/Redux/Actions/auth';
 import {
   Text,
   View,
+  Alert
 } from 'react-native';
-import { Button,Container, Header, Content, Form, Item, Input,Toast } from 'native-base';
-import { useDispatch } from "react-redux";
+import { Button,Spinner, Form, Item, Input,Toast } from 'native-base';
+import { useDispatch,useSelector } from "react-redux";
 
 export default function Register(props) {
 	const [input, setInput] = useState({ username: "", password: "" ,email:""});
 	const dispatch = useDispatch();
+	const isLoading=useSelector(state=>state.auth.isLoading)
 
 	props.navigation.navigate({ routeName: 'NavigatorLogin', key:'Home'});
 	//On Submit Login Data
 	const handleSubmit = async (event) => {
-		dispatch(postRegister (input))
-		.then(response => {
-		if (response.value.data.status === 200) {
-			
-			Toast.show({
-				position: "top",
-				duration: 3000,
-				text: response.value.data.message,
-				buttonText: 'Okay',
-				type: "success"
-			  })
-			props.navigation.navigate('Login')
-		} else {
-			Toast.show({
-				position: "top",
-				text: response.value.data.message,
-				duration: 3000,
-				buttonText: 'Okay',
-				type: "danger"
-			  })
+		if(input.username===''||input.password===''||input.email===''){
+			Alert.alert('Data Cant be empty')
+		}else{
+			dispatch(postRegister (input))
+			.then(response => {
+			if (response.value.data.status === 200) {
+				Alert.alert(response.value.data.message)
+				props.navigation.navigate('Login')
+			} else {
+				Alert.alert(response.value.data.message)
+			}
+			})
+			.catch(error => alert(error));
 		}
-		})
-		.catch(error => alert(error));
 	};
 
 	return (
@@ -74,7 +67,7 @@ export default function Register(props) {
 					style={{marginTop:20,width:150,marginStart:15,justifyContent: 'center',backgroundColor:"#e0245e"}} 
 					onPress={handleSubmit}
 					rounded>
-						<Text style={{fontWeight:"bold",fontSize: 17,color:'white'}}>Register</Text>
+						{isLoading===true?<Spinner color='#15202b' />:<Text style={{fontWeight:"bold",fontSize: 17,color:'white'}}>Register</Text>}
 					</Button>
 					
 				</Form>

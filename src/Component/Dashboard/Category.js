@@ -1,16 +1,12 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState} from 'react';
 import {
   View,
-  Image,
   ScrollView,
   TouchableOpacity,
-  TouchableHighlight,
-  Modal,
   Alert,
   StatusBar
 } from 'react-native';
 import { 
-  Thumbnail,
   Container, 
   Header, 
   Content, 
@@ -18,15 +14,11 @@ import {
   CardItem, 
   Body, 
   Text, 
-  Left,
-  Toast,
-  Button, 
   Icon, 
   Fab ,
-  Right
+  Spinner
    } from 'native-base';
 import { useSelector,useDispatch  } from 'react-redux';
-import {getCategories} from '../Public/Redux/Actions/categories';
 import {deleteCategories} from '../Public/Redux/Actions/categories';
 
 export default function Category(props) {
@@ -34,21 +26,7 @@ export default function Category(props) {
   const [showToast, setshowToast] = useState(false);
   const dispatch = useDispatch()
   const categories = useSelector(state => state.categories.categoriesList)
-
-  const fetchddata=async()=>{
-    await dispatch(getCategories (input))
-    .then(result => {
-      // console.log("Input",input)
-      // console.log("Hasil",result)
-    })
-    .catch(err => {
-      alert(err);
-    });
-  }
-
-  useEffect(()=>{
-    fetchddata()
-  },[])
+  const isLoading=useSelector(state=>state.categories.isLoading)
 
   const handleSubmitdelete = async (id) => {
     try {
@@ -86,41 +64,41 @@ export default function Category(props) {
             <Content >
            
             <ScrollView>
-                {categories.map(item=>{
-                    return(
-                    <View key={item.id_categories} style={{paddingStart:5,paddingEnd:5}}>
-                       <StatusBar backgroundColor="#e0245e" barStyle="light-content"/>
-                        <Card >
-                            <CardItem>
-                            <Body style={{flexDirection:'row'}} >
-                                <View style={{flexDirection: 'column',paddingStart:10,width:'77%'}}>
-                                    <Text >{item.Categories}</Text>
-                                </View>
-                                <View>
-                                  <TouchableOpacity
-                                      onPress={() =>
-                                        props.navigation.navigate('Editcategories',{
-                                          name:item.Categories,
-                                          id:item.id_categories
-                                        })
-                                      }>
-                                      <Icon type="Ionicons" name="md-create" style={{fontSize: 30, color: 'green',paddingEnd:30}} />
-                                    </TouchableOpacity> 
-                                </View>
-                                <View>
-                                <TouchableOpacity
-                                      onPress={()=>{onShow(item)}}
-                                      style={{marginRight:20}}
-                                    >
-                                      <Icon type="Ionicons" name="ios-trash" style={{fontSize: 30, color: 'red',paddingStart:5,marginEnd:30}} />
-                                    </TouchableOpacity>
-                                </View>
-                            </Body>
-                            </CardItem>
-                        </Card>
-                    </View>
-                    )
-                })}
+              {categories.map(item=>{
+                return(
+                  <View key={item.id_categories} style={{paddingStart:5,paddingEnd:5}}>
+                    <StatusBar backgroundColor="#e0245e" barStyle="light-content"/>
+                    <Card >
+                      <CardItem>
+                      <Body style={{flexDirection:'row'}} >
+                          <View style={{flexDirection: 'column',paddingStart:10,width:'77%'}}>
+                              <Text >{item.Categories}</Text>
+                          </View>
+                          <View>
+                            <TouchableOpacity
+                                onPress={() =>
+                                  props.navigation.navigate('Editcategories',{
+                                    name:item.Categories,
+                                    id:item.id_categories
+                                  })
+                                }>
+                                <Icon type="Ionicons" name="md-create" style={{fontSize: 30, color: '#62b1f6',paddingEnd:30}} />
+                              </TouchableOpacity> 
+                          </View>
+                          <View>
+                          <TouchableOpacity
+                                onPress={()=>{onShow(item)}}
+                                style={{marginRight:20}}
+                              >
+                                <Icon type="Ionicons" name="ios-trash" style={{fontSize: 30, color: '#e0245e',paddingStart:5,marginEnd:30}} />
+                              </TouchableOpacity>
+                          </View>
+                      </Body>
+                      </CardItem>
+                    </Card>
+                  </View>
+                )
+              })}
             </ScrollView>
               
             </Content>

@@ -35,12 +35,3 @@ export const deleteProduct = (input) => {
     )
   };
 };
-
-// export const postOrder=(input,total)=>{
-//   // input.push(total)
-//   // console.log("DATA INPUT",input)
-//   return{
-//       type: 'POST_ORDER',
-//       payload:axios.post('https://poswebsite.herokuapp.com/product/order',{body: {subtotal:total,order:input}},{headers:headers})
-//   }
-// }

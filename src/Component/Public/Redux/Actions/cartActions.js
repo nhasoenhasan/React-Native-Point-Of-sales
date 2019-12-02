@@ -27,13 +27,17 @@ export const addQuantity=(id)=>{
     }
 }
 
-// add qt action
-export const postOrder=(input,total)=>{
-    console.log("TOTAL=",total)
-    // total=90
-    // console.log("DATA INPUT",inputs)
+// POST ORDER
+export const postOrder=(order,total)=>{
     return{
         type: 'POST_ORDER',
-        payload:axios.post('https://poswebsite.herokuapp.com/product/order',{body: {subtotal:total,order:input}})
+        payload:axios.post('https://poswebsite.herokuapp.com/product/order/',{total,order})
     }
+}
+
+export const getOrder=()=>{
+  return{
+      type: 'GET_ORDER',
+      payload:axios.get('https://poswebsite.herokuapp.com/product/order/')
   }
+}

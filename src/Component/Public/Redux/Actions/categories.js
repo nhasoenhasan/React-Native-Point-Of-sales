@@ -1,15 +1,15 @@
 import axios from 'axios';
-// const token = localStorage.getItem("x-access-token");
-// const headers = {
-//   "xaccess-token": token
-// };
+import AsyncStorage from '@react-native-community/async-storage';
+
+const token = AsyncStorage.getItem("xaccess-token");
+const headers = {
+  "xaccess-token": token
+};
 
 export const getCategories = (data) => {
   return {
     type: 'GET_CATEGORIES',
-    payload: axios.get ('https://poswebsite.herokuapp.com/product/categories',{params:
-      data,
-    }),
+    payload: axios.get ('https://poswebsite.herokuapp.com/product/categories',{params: data},{headers:headers}),
   };
 };
 

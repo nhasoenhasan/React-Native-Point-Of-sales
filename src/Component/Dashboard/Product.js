@@ -8,11 +8,12 @@ import {
   StatusBar
 } from 'react-native';
 import {deleteProduct} from '../Public/Redux/Actions/product';
-import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text, Left,Icon,Fab,Button,Right } from 'native-base';
+import { Thumbnail,Container, Header, Content, Card, CardItem, Body, Text,Spinner,Icon,Fab,Button,Right } from 'native-base';
 import { useSelector,useDispatch  } from 'react-redux';
 
 export default function Product(props) {
     const product = useSelector(state => state.product.productList)
+    const isLoading = useSelector(state => state.product.isLoading)
     const dispatch = useDispatch()
 
     const handleSubmitdelete = async (id) => {
@@ -47,7 +48,7 @@ export default function Product(props) {
             </Header>
             <Content >
             <ScrollView >
-                {product.map(item=>{
+              {product.map(item=>{
                     return(
                     <View key={item.id_product} >
                       <StatusBar backgroundColor="#e0245e" barStyle="light-content"/>
@@ -69,13 +70,13 @@ export default function Product(props) {
                                             list:item,
                                         })
                                         }>
-                                        <Icon type="Ionicons" name="md-create" style={{fontSize: 25, color: 'green',paddingEnd:30}} />
+                                        <Icon type="Ionicons" name="md-create" style={{fontSize: 25, color: '#62b1f6',paddingEnd:30}} />
                                     </TouchableOpacity> 
                                     <TouchableOpacity
                                         style={{paddingTop:35}}
                                         onPress={()=>{onShow(item)}}
                                         >
-                                        <Icon type="Ionicons" name="ios-trash" style={{fontSize: 25, color: 'red',paddingStart:5}} />
+                                        <Icon type="Ionicons" name="ios-trash" style={{fontSize: 25, color: '#e0245e',paddingStart:5}} />
                                   </TouchableOpacity>
                                   </View>
                                 </View>

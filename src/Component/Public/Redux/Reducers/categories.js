@@ -49,6 +49,20 @@ const initialState = {
             isFulfilled: true,
             categoriesList
           };
+      //EDIT CATEGORIES
+      case 'PATCH_CATEGORIES_PENDING':
+        return {
+          ...state,
+          isLoading: true,
+          isRejected: false,
+          isFulfilled: false,
+        };
+      case 'PATCH_CATEGORIES_REJECTED':
+        return {
+          ...state,
+          isLoading: false,
+          isRejected: true,
+        };
       case 'PATCH_CATEGORIES_FULFILLED':
           const categoriesListAfterPatch = state.categoriesList.map (categories => {
             if (categories.id_categories === action.payload.data.result[0].id_categories) {
@@ -62,7 +76,20 @@ const initialState = {
             isFulfilled: true,
             categoriesList:categoriesListAfterPatch
           };
-
+      //DELETE CATEGORIES
+      case 'DELETE_CATEGORIES_PENDING':
+        return {
+          ...state,
+          isLoading: true,
+          isRejected: false,
+          isFulfilled: false,
+        };
+      case 'DELETE_CATEGORIES_REJECTED':
+        return {
+          ...state,
+          isLoading: false,
+          isRejected: true,
+        };
       case 'DELETE_CATEGORIES_FULFILLED':
         const  dataAfterDelete = state.categoriesList.filter(function(value, index, arr){
           return value.id_categories != action.payload.data.id;

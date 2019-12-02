@@ -6,37 +6,68 @@ import {
   ScrollView,
   StatusBar
 } from 'react-native';
-import {Content, Container,Card, CardItem, Header, Item, Input, Button, Text, Thumbnail, Left, Body, Right } from 'native-base';
+import {Content, Container,Card, CardItem, Header, Item, Input, Button, Text, Thumbnail,Body,Spinner,Badge } from 'native-base';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { useSelector,useDispatch  } from 'react-redux';
 import {getProduct} from '../Public/Redux/Actions/product';
+import {getCategories} from '../Public/Redux/Actions/categories';
 import { addToCart } from '../Public/Redux/Actions/cartActions';
-
+import {getOrder} from '../Public/Redux/Actions/cartActions';
+import notFoundillustration from '../../Assets/Images/notFound.png'
 
 export default function Dashboard(props) {
   const [input, setInput] = useState({ search: "",sort: "",order:"" });
   const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.product.isLoading)
+  const items = useSelector(state => state.product.addedItems)
 
   const fetchddata=async()=>{
     await dispatch(getProduct (input))
     .then(result => {
-      // console.log("Input",input)
-      // console.log("Hasil",result)
+
     })
     .catch(err => {
       alert(err);
     });
   }
 
+  const fetchddatacategories=async()=>{
+    await dispatch(getCategories (input))
+    .then(result => {
+    })
+    .catch(err => {
+      alert(err);
+    });
+  }
+
+  const fetchddataOrder=async()=>{
+    await dispatch(getOrder())
+    .then(result => {
+
+    })
+    .catch(err => {
+      alert(err);
+    });
+  }
+  
+  useEffect(()=>{
+    fetchddatacategories()
+  },[])
+
   useEffect(()=>{
     fetchddata()
   },[input])
+
+  useEffect(()=>{
+      fetchddataOrder()
+    },[])
 
   const addCart=(item)=>{
     dispatch(addToCart(item))
   }
 
   const product = useSelector(state => state.product.productList)
+  
 	return (
     <Container style={{backgroundColor: '#15202b'}}>
       
@@ -47,7 +78,7 @@ export default function Dashboard(props) {
         }} >
     
           <TouchableOpacity onPress={() => props.navigation.openDrawer()} style={{paddingTop:8}}>
-            <Thumbnail small style={{marginStart:10}}  source={{uri: 'https://avatars3.githubusercontent.com/u/23376494?s=460&v=4'}}/>
+            <Thumbnail small style={{marginStart:10}}  source={{uri: 'https://scontent-sin6-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/72771346_453959675315642_344653513424789892_n.jpg?_nc_ht=scontent-sin6-1.cdninstagram.com&_nc_cat=1&oh=5059274e73031ab025ea2a174caf23cd&oe=5E69FE3C'}}/>
           </TouchableOpacity>
           <Item 
               rounded 
@@ -71,10 +102,12 @@ export default function Dashboard(props) {
             <TouchableOpacity  onPress={() =>props.navigation.navigate('Chart')}>
             <Icon
               style={{ paddingRight: 10,marginTop:7,paddingEnd:20,color:'#e0245e',paddingTop:5 }}
-             
               name="cart"
               size={25}
             />
+            <Badge info style={{position:'absolute',marginStart:10,marginTop:2}}>
+              <Text >{items.length}</Text>
+            </Badge>
             </TouchableOpacity>
       </Header>
       <View>
@@ -97,13 +130,23 @@ export default function Dashboard(props) {
               <Text style={{fontSize:11}}>Categories</Text>
             </Button>
           </View>
-
         </View>
       </View>
      <Content>
       <View >
       <ScrollView>
-        {product.map(item=>{
+        {isLoading===true?
+        <View style={{paddingTop:'50%'}}>
+          <Spinner color='#e0245e'/>
+        </View>
+        :
+        product.length===0 && isLoading===false?
+        <View style={{alignItems:'center',paddingTop:'10%'}}>
+            <Image source={notFoundillustration} style={{resizeMode: 'contain',height: 225,width:255}}/>
+            <Text style={{color:'white',fontSize:23,fontWeight:'bold'}}>Product Does Not Exist</Text>
+        </View>
+        :
+        product.map(item=>{
           return(
             <View key={item.id_product}style={{paddingStart:5,paddingEnd:5}}>
               <Card>
@@ -115,12 +158,11 @@ export default function Dashboard(props) {
                       <View style={{flexDirection: 'column',paddingStart:10,width:'77%'}}>
                           <Text >{item.name}</Text>
                           <Text   >Rp.{item.price}</Text>
-                          <Text   >Quantity {item.quantity}</Text>
                       </View>
                       
                   </Body>
                   <View style={{width:60}} >
-                        <Button small rounded success onPress={()=>{addCart(item.id_product)}}>
+                        <Button small rounded info onPress={()=>{addCart(item.id_product)}}>
                           <Text>Add</Text>
                         </Button>
                       </View>
@@ -128,7 +170,8 @@ export default function Dashboard(props) {
               </Card>
           </View>
           )
-        })}
+        })
+      }
       </ScrollView>
       </View>
       </Content>
