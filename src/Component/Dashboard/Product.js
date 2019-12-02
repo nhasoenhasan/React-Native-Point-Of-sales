@@ -15,10 +15,11 @@ export default function Product(props) {
     const product = useSelector(state => state.product.productList)
     const isLoading = useSelector(state => state.product.isLoading)
     const dispatch = useDispatch()
+    const token = useSelector(state => state.auth.Token)
 
     const handleSubmitdelete = async (id) => {
         try {
-          await dispatch(deleteProduct(id))
+          await dispatch(deleteProduct(id,token))
         } catch (err) {
           console.log(err)
         }

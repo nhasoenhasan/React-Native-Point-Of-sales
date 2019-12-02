@@ -1,40 +1,33 @@
 import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
 
-const token = AsyncStorage.getItem("xaccess-token");
-const headers = {
-  "xaccess-token": token
-};
-
-export const getCategories = (data) => {
+export const getCategories = (data,token) => {
   return {
     type: 'GET_CATEGORIES',
-    payload: axios.get ('https://poswebsite.herokuapp.com/product/categories',{params: data},{headers:headers}),
+    payload: axios.get ('https://poswebsite.herokuapp.com/product/categories',{params: data,headers:{"xaccess-token": token}}),
   };
 };
+//
 
-export const postCategories = (input) => {
+export const postCategories = (input,token) => {
   return {
     type: 'POST_CATEGORIES',
-    payload: axios.post ('https://poswebsite.herokuapp.com/product/categories',input),
+    payload: axios.post ('https://poswebsite.herokuapp.com/product/categories',input,{headers:{"xaccess-token": token}})
   };
 };
 
-export const patchCategories = (input) => {
+export const patchCategories = (input,token) => {
   const id=input.id_categories;
   return {
     type: 'PATCH_CATEGORIES',
-    payload: axios.patch ('https://poswebsite.herokuapp.com/product/categories/'+id,input,
-    )
+    payload: axios.patch ('https://poswebsite.herokuapp.com/product/categories/'+id,input,{headers:{"xaccess-token": token}})
   };
 };
 
-export const deleteCategories = (input) => {
+export const deleteCategories = (input,token) => {
   
   const id=input
   return {
     type: 'DELETE_CATEGORIES',
-    payload: axios.delete ('https://poswebsite.herokuapp.com/product/categories/'+id,
-    )
+    payload: axios.delete ('https://poswebsite.herokuapp.com/product/categories/'+id,{headers:{"xaccess-token": token}})
   };
 };

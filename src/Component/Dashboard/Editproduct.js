@@ -20,12 +20,13 @@ export default function Editproduct(props) {
     const dispatch = useDispatch()
     const category = useSelector(state => state.categories.categoriesList)
     const isLoading=useSelector(state=>state.product.isLoading)
+    const token = useSelector(state => state.auth.Token)
 
     const handleSubmit = async () => {
         if(input.name===''||input.description===''||input.image===''||input.id_categories===''||input.price===''||input.quantity===''){
             Alert.alert('Data Cant be Empty')
         }else{
-            dispatch(patchProduct (input))
+            dispatch(patchProduct (input,token))
             .then(response => {
             if (response.value.data.status === 200) {
                 Toast.show({

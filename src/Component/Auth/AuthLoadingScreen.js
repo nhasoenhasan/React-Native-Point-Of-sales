@@ -6,12 +6,27 @@ import {
   Image
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Splashanimation from '../../Assets/Images/splashanimation.gif';
-import logo from '../../Assets/Images/CoffeMountain.png'
+import {useDispatch  } from 'react-redux';
+import logo from '../../Assets/Images/CoffeMountain.png';
+import {setToken} from '../Public/Redux/Actions/auth'
 
 export default function AuthLoadingScreen(props) {
-    
+    const dispatch = useDispatch()
+    const setTokenredux=async(token)=>{
+        await dispatch(setToken(token))
+    }
 
+    useEffect(() => {
+        AsyncStorage.getItem('xaccess-token', () => {})
+        .then((token) => {
+            if (token !== null){
+                setTokenredux(token)}
+            else{
+                props.navigation.navigate('NavigatorHome')}
+        });
+    },[]);
+
+    
     useEffect(() => {
         AsyncStorage.getItem('xaccess-token', () => {})
         .then((token) => {
@@ -20,7 +35,9 @@ export default function AuthLoadingScreen(props) {
             else{
                 props.navigation.navigate('NavigatorHome')}
         });
-    });
+    },[]);
+
+    
 
     return (
         <View style={{alignItems:'center',padding:'35%'}}>

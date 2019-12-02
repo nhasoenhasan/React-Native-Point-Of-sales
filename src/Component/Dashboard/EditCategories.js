@@ -19,11 +19,11 @@ export default function Editcategories(props) {
     const [input, setInput] = useState({ id_categories:"",Categories:"" });
     const {navigation}=props;
     const isLoading=useSelector(state=>state.categories.isLoading)
-
+    const token = useSelector(state => state.auth.Token)
     const dispatch = useDispatch()
 
-    const handleSubmit = async (event) => {
-        dispatch(patchCategories (input))
+    const handleSubmit = async () => {
+        dispatch(patchCategories (input,token))
         .then(response => {
         if (response.value.data.status === 200) {
             Toast.show({

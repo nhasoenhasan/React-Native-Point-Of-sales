@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  StatusBar
+  StatusBar,
+  RefreshControl,
 } from 'react-native';
 import {Content, Container,Card, CardItem, Header, Item, Input, Button, Text, Thumbnail,Body,Spinner,Badge } from 'native-base';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
@@ -15,16 +16,30 @@ import { addToCart } from '../Public/Redux/Actions/cartActions';
 import {getOrder} from '../Public/Redux/Actions/cartActions';
 import notFoundillustration from '../../Assets/Images/notFound.png'
 
+function wait(timeout) {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
+
 export default function Dashboard(props) {
   const [input, setInput] = useState({ search: "",sort: "",order:"" });
+  const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.product.isLoading)
+  const token = useSelector(state => state.auth.Token)
   const items = useSelector(state => state.product.addedItems)
 
-  const fetchddata=async()=>{
-    await dispatch(getProduct (input))
-    .then(result => {
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
 
+    wait(2000).then(() => setRefreshing(false));
+  }, [refreshing]);
+
+  const fetchddata=async()=>{
+    await dispatch(getProduct (input,token))
+    .then(result => {
+      
     })
     .catch(err => {
       alert(err);
@@ -32,7 +47,7 @@ export default function Dashboard(props) {
   }
 
   const fetchddatacategories=async()=>{
-    await dispatch(getCategories (input))
+    await dispatch(getCategories (input,token))
     .then(result => {
     })
     .catch(err => {
@@ -41,7 +56,7 @@ export default function Dashboard(props) {
   }
 
   const fetchddataOrder=async()=>{
-    await dispatch(getOrder())
+    await dispatch(getOrder(token))
     .then(result => {
 
     })
@@ -135,6 +150,7 @@ export default function Dashboard(props) {
      <Content>
       <View >
       <ScrollView>
+       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         {isLoading===true?
         <View style={{paddingTop:'50%'}}>
           <Spinner color='#e0245e'/>

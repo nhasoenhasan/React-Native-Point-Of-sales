@@ -28,16 +28,16 @@ export const addQuantity=(id)=>{
 }
 
 // POST ORDER
-export const postOrder=(order,total)=>{
+export const postOrder=(order,total,token)=>{
     return{
         type: 'POST_ORDER',
-        payload:axios.post('https://poswebsite.herokuapp.com/product/order/',{total,order})
+        payload:axios.post('https://poswebsite.herokuapp.com/product/order/',{total,order},{headers:{"xaccess-token": token}})
     }
 }
 
-export const getOrder=()=>{
+export const getOrder=(token)=>{
   return{
       type: 'GET_ORDER',
-      payload:axios.get('https://poswebsite.herokuapp.com/product/order/')
+      payload:axios.get('https://poswebsite.herokuapp.com/product/order/',{headers:{"xaccess-token": token}})
   }
 }

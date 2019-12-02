@@ -24,7 +24,7 @@ export default function Cart(props){
     const[isLoading,setisLoading]=useState(false);
 
     const [Total, setTotal]=useState();
-
+    const token = useSelector(state => state.auth.Token)
     const items = useSelector(state => state.product.addedItems)
     const Totals = useSelector(state => state.product.total)
     const dispatch=useDispatch()
@@ -53,7 +53,7 @@ export default function Cart(props){
     const handlecheckout = async()=>{
         setisLoading(true)
         try {
-             const result = await dispatch(postOrder(input,Totals))
+             const result = await dispatch(postOrder(input,Totals,token))
              if(result.action.payload.data.status===200){
                 setisLoading(false)
                 Alert.alert(result.action.payload.data.message)

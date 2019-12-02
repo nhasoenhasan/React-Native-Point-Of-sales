@@ -10,7 +10,8 @@ const initialState = {
     isLoading: false,
     isRejected: false,
     isFulfilled: false,
-    asynctoken:''
+    asynctoken:'',
+    Token:''
   };
   
   const auth = (state = initialState, action) => {
@@ -51,8 +52,7 @@ const initialState = {
           isRejected: true,
         };
       case 'POST_LOGIN_FULFILLED':
-        const token =action.payload.data.token;
-        AsyncStorage.setItem('xaccess-token',token)
+        AsyncStorage.setItem('xaccess-token',action.payload.data.token)
         return {
           ...state,
           isLoading: false,
@@ -60,7 +60,14 @@ const initialState = {
           loginMessage: action.payload.data.message,
           loginStatus:action.payload.data.status,
         };  
-     
+      //-------------------------------------------------------------------
+      case 'SET_TOKEN':
+        return {
+          ...state,
+          isLoading: false,
+          isFulfilled: true,
+          Token:action.token,
+        };  
       default:
         return state;
     }

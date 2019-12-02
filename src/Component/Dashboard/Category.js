@@ -26,11 +26,11 @@ export default function Category(props) {
   const [showToast, setshowToast] = useState(false);
   const dispatch = useDispatch()
   const categories = useSelector(state => state.categories.categoriesList)
-  const isLoading=useSelector(state=>state.categories.isLoading)
+  const token = useSelector(state => state.auth.Token)
 
   const handleSubmitdelete = async (id) => {
     try {
-      await dispatch(deleteCategories(id))
+      await dispatch(deleteCategories(id,token))
     } catch (err) {
       console.log(err)
     }

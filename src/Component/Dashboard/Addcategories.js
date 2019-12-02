@@ -19,9 +19,10 @@ export default function Addcategories(props) {
     const [input, setInput] = useState({ id_categories:"",Categories:"" });
     const dispatch = useDispatch()
     const isLoading=useSelector(state=>state.categories.isLoading)
+    const token = useSelector(state => state.auth.Token)
 
-    const handleSubmit = async (event) => {
-        dispatch(postCategories (input))
+    const handleSubmit = async () => {
+        dispatch(postCategories (input,token))
         .then(response => {
         if (response.value.data.status === 200) {
             Toast.show({
