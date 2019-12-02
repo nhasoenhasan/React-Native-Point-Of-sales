@@ -8,7 +8,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import {useDispatch  } from 'react-redux';
 import logo from '../../Assets/Images/CoffeMountain.png';
-import {setToken} from '../Public/Redux/Actions/auth'
+import {setToken} from '../Public/Redux/Actions/auth';
 
 export default function AuthLoadingScreen(props) {
     const dispatch = useDispatch()

@@ -59,6 +59,7 @@ const initialState = {
           isFulfilled: true,
           loginMessage: action.payload.data.message,
           loginStatus:action.payload.data.status,
+          Token:action.payload.data.token
         };  
       //-------------------------------------------------------------------
       case 'SET_TOKEN':

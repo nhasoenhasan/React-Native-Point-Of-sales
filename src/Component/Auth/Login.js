@@ -1,14 +1,15 @@
 import React,{useState,useEffect} from 'react';
 import {postLogin} from '../Public/Redux/Actions/auth';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Text,
   View,
   Alert
 } from 'react-native';
-
 import { Button,Spinner, Content, Form, Item, Input,Toast } from 'native-base';
 import { useDispatch,useSelector } from "react-redux";
+import {setToken} from '../Public/Redux/Actions/auth';
+
 
 const Login = (props) => {
     const [input, setInput] = useState({ username: "", password: "" ,token:""});
@@ -23,12 +24,12 @@ const Login = (props) => {
 			dispatch(postLogin (input))
 			.then(response => {
 				if  ( response.value.data.status === 200) {
-						Toast.show({
-						position: "top",
-						duration: 3000,
-						text: response.value.data.message,
-						buttonText: 'Okay',
-						type: "success"
+					Toast.show({
+					position: "top",
+					duration: 3000,
+					text: response.value.data.message,
+					buttonText: 'Okay',
+					type: "success"
 					})
 					props.navigation.navigate('NavigatorDashboard')
 					
