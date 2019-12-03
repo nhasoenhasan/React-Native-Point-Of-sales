@@ -14,7 +14,7 @@ import {getProduct} from '../Public/Redux/Actions/product';
 import {getCategories} from '../Public/Redux/Actions/categories';
 import { addToCart } from '../Public/Redux/Actions/cartActions';
 import {getOrder} from '../Public/Redux/Actions/cartActions';
-import notFoundillustration from '../../Assets/Images/notFound.png'
+import notFoundillustration from '../Assets/Images/notFound.png'
 
 function wait(timeout) {
   return new Promise(resolve => {

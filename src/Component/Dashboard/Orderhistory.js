@@ -32,16 +32,6 @@ export default function Orderhistory(props) {
         arrmonthname_orders.push(datas[i].month_name);
     }
 
-    const fetchddata=async()=>{
-      await dispatch(getOrder())
-      .then(result => {
-
-      })
-      .catch(err => {
-        alert(err);
-      });
-    }
-
     return (
       <Container style={{backgroundColor:'#15202b'}}> 
         <View style={styles.sectionContainer}>

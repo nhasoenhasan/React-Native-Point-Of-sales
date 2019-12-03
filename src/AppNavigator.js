@@ -1,5 +1,4 @@
 import React from "react";
-import Alert from 'react-native';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -133,7 +132,7 @@ import AsyncStorage from '@react-native-community/async-storage';
           </View>
           <Content style={{marginTop:'10%'}}>
             <List>
-              <ListItem itemDivider style={{backgroundColor:'#e0245e',alignItems:'center'}}>
+              <ListItem itemDivider style={{backgroundColor:'#e0245e',alignItems:'center',justifyContent:'center'}}>
                 <Text style={{color:'white'}}>Cashier</Text>
               </ListItem>
               <ListItem >
@@ -148,7 +147,9 @@ import AsyncStorage from '@react-native-community/async-storage';
               </ListItem>
               <ListItem >
                 <Body>
-                  <Text style={{color:'white'}}> Log out</Text>
+                  <TouchableOpacity onPress={deleteToken} >
+                    <Text style={{color:'white'}}> Log out</Text>
+                  </TouchableOpacity>
                 </Body>
                 <Right>
                   <TouchableOpacity onPress={deleteToken} >

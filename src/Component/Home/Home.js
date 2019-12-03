@@ -6,7 +6,7 @@ import {
   Image
 } from 'react-native';
 import { Button,Text,Thumbnail} from 'native-base';
-import Homegif from '../../Assets/Images/Home.gif'
+import Homegif from '../Assets/Images/Home.gif'
 
 Home.navigationOptions={
     header: null

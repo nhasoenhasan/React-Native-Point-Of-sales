@@ -4,7 +4,7 @@ import { Text,View,Alert,Image } from 'react-native';
 import { Container,Spinner, Content, Card, CardItem, Body,Thumbnail,Button } from 'native-base';
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import { addQuantity,subtractQuantity,removeItem,postOrder} from '../Public/Redux/Actions/cartActions';
-import Cartillustration from '../../Assets/Images/Cart.png';
+import Cartillustration from '../Assets/Images/Cart.png';
 
 Cart.navigationOptions={
     headerStyle: {
