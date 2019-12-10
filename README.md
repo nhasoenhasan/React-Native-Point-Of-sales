@@ -71,7 +71,7 @@ You can Download the APK [`here`](https://drive.google.com/drive/folders/1WjA5hT
   </span>
   <h3>Manage Product Screen</h3>
   <span>
-     <image width="400" src="screenshot/Mproduct.png" />
+    <image width="400" src="screenshot/Mproduct.png" />
   </span>
   <h3>Manage Categories Screen</h3>
   <span>
