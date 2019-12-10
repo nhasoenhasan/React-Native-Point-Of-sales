@@ -1,8 +1,7 @@
 <h1 align="center">MSG - Mart<br>( React Native Point of Sales - Android)</h1>
 
 <p align="center">
-  <img src="src/Assets/Images/CoffeMountain.png
-  " width="200"/>
+  <img src="src/Component/Assets/Images/CoffeMountain.png" width="200"/>
 </p>
 
 <p align="center">
@@ -66,13 +65,17 @@ You can Download the APK [`here`](https://drive.google.com/drive/folders/1WjA5hT
   <span>
       <image width="400" src="screenshot/Signin.png" />
   </span>
+  <h3>Dashboard Screen</h3>
+  <span>
+      <image width="400" src="screenshot/Dashboard.png" />
+  </span>
   <h3>Manage Product Screen</h3>
   <span>
-      <image width="400" src="screenshot/Mproduct.png" />
+     <image width="400" src="screenshot/Mproduct.png" />
   </span>
   <h3>Manage Categories Screen</h3>
   <span>
-      <image width="400" src="screenshot/Mcategories.png" />
+    <image width="400" src="screenshot/MCategories.png" />
   </span>
   <h3>Add Categories Screen</h3>
   <span>
@@ -80,7 +83,7 @@ You can Download the APK [`here`](https://drive.google.com/drive/folders/1WjA5hT
   </span>
   <h3>Cart Screen</h3>
   <span>
-      <image width="400" src="screenshot/Cart.png" />
+    <image width="400" src="screenshot/Cart.png" />
   </span>
 </div>
 
