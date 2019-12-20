@@ -41,12 +41,12 @@
 ## Get Started
  1. Check Backend RESTfull API from [Coffe Mountain](https://github.com/nhasoenhasan/RESTful-API-for-Point-Of-Sales-App)
  2. Backend can be accessed via the link in Heroku [Coffe Mountain](https://poswebsite.herokuapp.com/)
- 3. Git clone [Coffe Mountain - Mobile Apps](https://github.com/aldoignatachandra/MSG-Mart-React_Native_POS) or download zip
+ 3. Git clone [Coffe Mountain - Mobile Apps](https://github.com/nhasoenhasan/React-Native-Point-Of-sales) or download zip
  4. Open in your code editor (vscode, atom or other)
  5. npm Install & react-native run-android
 
-## Download the APK (MSG-Mart)
-You can Download the APK [`here`](https://drive.google.com/drive/folders/1WjA5hTWK0XWTKMYAMh5tb2ZoB-ouA9aA?usp=sharingg)
+## Download the APK (Coffe Mountain)
+You can Download the APK [`here`](https://drive.google.com/drive/folders/15_NB2vk-9nVX0ud8p0Kio74q664dpi35?usp=sharing)
 
 ## Build with React Hooks & Redux
 <img width="390" height="190" src="https://miro.medium.com/max/966/1*jYy3Hc1qmQL9gpYF5rI3Sg.png">
